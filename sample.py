@@ -261,15 +261,18 @@ class TestAnalyzer:
                 
                 ########### Manual Data Entry Lopp ############
                 while True:
-                    if len(registers) == 1:
-                        register = registers[-1]
-                        value = int(input(f'''Enter Trim register value of {trim_reg}\n\
-                            Move the Value (must be in int) and notice {savemeas} change\n\
-                            press Ctrl+C to exit loop:>'''))
-                        I2C_write_register(self.ivm6201,register,value)
-                    else:
-                        print(f'!!!!!!!!!!! multiple registers passed !!!!!!!!!')
-                    pass
+                    try:
+                        if len(registers) == 1:
+                            register = registers[-1]
+                            value = int(input(f'''Enter Trim register value of {trim_reg}\n\
+                                Move the Value (must be in int) and notice {savemeas} change\n\
+                                press Ctrl+C to exit loop:>'''))
+                            I2C_write_register(self.ivm6201,register,value)
+                        else:
+                            print(f'!!!!!!!!!!! multiple registers passed !!!!!!!!!')
+                        pass
+                    except KeyboardInterrupt:
+                        pass
     def _process_read_register(self,read_data):
         registers = read_data.get('registers',[])
         msb=0
