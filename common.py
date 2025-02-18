@@ -6,7 +6,10 @@ import json
 from ensure import ensure_annotations
 from box import ConfigBox
 from typing import Union
-
+import EasyMCP2221
+from EasyMCP2221 import Device
+from time import sleep
+from typing import Union
 
 @ensure_annotations
 def read_yaml(path_to_yaml) -> ConfigBox:
@@ -24,4 +27,45 @@ ivm6201 = read_yaml('ivm6201.yaml').ivm6201
 def ivm6201_pin_check(pin='', pins=list(ivm6201.pins.values()) ):
     return pin.lower() in ''.join(pins).lower()
     # return pin in pins
+
+def get_device(deviceNo=0):
+    try:
+        device = Device(devnum=deviceNo)
+        return device
+    except Exception as e :
+        log.error(e)
+        return None
+
+def get_slave(device: Device,address=ivm6201.Address):
+        try:
+            slave = device.I2C_Slave(address)
+            sleep(0.01)
+            if slave:
+                return slave
+            else:
+                return None
+            
+        except EasyMCP2221.exceptions.NotAckError:
+            print
+def I2C_read_register(slave,register_addr:0x00):
+    try:
+        if slave:
+            return int.from_bytes(slave.read_register(register_addr),'little')
+        else :
+            return None
+    except Exception as e:
+        print(e)
         
+def I2C_write_register(slave,register:dict,value:int|float):
+    if slave:
+        register_addr = register.get('address')
+        msb = register.get('msb')
+        lsb = register.get('lsb')
+        device_data = I2C_read_register(slave=slave,register_addr=register_addr) # write the existing data
+        bit_width = 2**(msb - lsb+1)
+        mask = ~((bit_width-1) << lsb)
+        device_data = (device_data & mask) | ((int(value,16)) << lsb) # modify the data
+        slave.write([register_addr,device_data])
+        return I2C_read_register(slave=slave,register_addr=register_addr)
+    else:
+        return None

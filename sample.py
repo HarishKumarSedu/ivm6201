@@ -23,7 +23,7 @@ from dft import (
     parse_read_instruction,
     parse_restore_instruction
 )
-from common import ivm6201_pin_check
+from common import ivm6201_pin_check, get_device, get_slave, I2C_read_register,I2C_write_register
 
 warnings.filterwarnings('ignore')
 
@@ -135,6 +135,8 @@ class TestAnalyzer:
             sheet_name (str): Name of the sheet to read.
             test_name (str): Name of the test to analyze.
         """
+        self.mcp = get_device(deviceNo=0)
+        self.ivm6201 = get_slave(device=self.mcp,address=0xD0) if self.mcp else None
         self.excel_file = excel_file
         self.sheet_name = sheet_name
         self.test_name = test_name
@@ -194,7 +196,7 @@ class TestAnalyzer:
 
         # Use a dictionary to map parsing functions to execution logic for better readability and maintainability
         instruction_parsers = {
-            parse_procedure_name: lambda procedure : parse_procedure_name(instruction),
+            parse_procedure_name: lambda procedure_name : self._process_procedure(procedure_name),
             parse_register_notation: lambda register: None,  # Placeholder for register notation
             parse_wait_delay: lambda delay: self.actions.dft_delay_action(delay),
             parse_force_instruction: lambda force: self.actions.dft_force_action(force),
@@ -247,15 +249,27 @@ class TestAnalyzer:
         meas_sweep_data = []
         code = []
         if savemeas and trim_reg:
-            msb = [msb+register.get('msb')+1 for register in registers][-1]
-            lsb = [lsb+register.get('lsb') for register in registers][-1]
-            # sweep loop 
-            # uncomment when you  take iterative measurment
-            # for code_iter in range(2**(msb-lsb)):
-            #     meas_data = self._process_savemeas(savemeas)
-            #     meas_sweep_data.append(meas_data)
-            #     code.append(code_iter)
-            pass
+            if self.ivm6201:
+                # msb = [msb+register.get('msb') for register in registers][-1]
+                # lsb = [lsb+register.get('lsb') for register in registers][-1]
+                # sweep loop 
+                # uncomment when you  take iterative measurment
+                # for code_iter in range(2**(msb-lsb)):
+                #     meas_data = self._process_savemeas(savemeas)
+                #     meas_sweep_data.append(meas_data)
+                #     code.append(code_iter)
+                
+                ########### Manual Data Entry Lopp ############
+                while True:
+                    if len(registers) == 1:
+                        register = registers[-1]
+                        value = int(input(f'''Enter Trim register value of {trim_reg}\n\
+                            Move the Value (must be in int) and notice {savemeas} change\n\
+                            press Ctrl+C to exit loop:>'''))
+                        I2C_write_register(self.ivm6201,register,value)
+                    else:
+                        print(f'!!!!!!!!!!! multiple registers passed !!!!!!!!!')
+                    pass
     def _process_read_register(self,read_data):
         registers = read_data.get('registers',[])
         msb=0
@@ -442,6 +456,15 @@ class TestAnalyzer:
             self._process_constant_value(const_value)
         elif (register := parse_register_notation(instruction)):
             print('Test Register operation', register)
+            registers = register.get('registers',[])
+            value = register.get('value',0)
+            if self.ivm6201 :
+                if len(registers) == 1:
+                    register = registers[-1]
+                    I2C_write_register(self.ivm6201,register,value)
+                else:
+                    print(f'!!!!!!!!!!! multiple registers passed !!!!!!!!!')
+                
         elif (force_sweep := parse_force_sweep_instruction(instruction)):
             if (primay_signal := force_sweep.get('primary_signal')) and (ivm6201_pin_check(primay_signal)):
                 if (secondary_signal := force_sweep.get('secondary_signal')):
