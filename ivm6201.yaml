@@ -1,0 +1,97 @@
+ivm6201:
+  pins:
+    pin01 : OUT2+
+    pin02 : OUT2+
+    pin03 : GND2+
+    pin04 : GND2-
+    pin05 : OUT2-
+    pin06 : OUT2-
+    pin07 : FB2-
+    pin08 : VCC2-
+    pin09 : VCC1-
+    pin10 : FB1-
+    pin11 : OUT1-
+    pin12 : OUT1-
+    pin13 : GND1-
+    pin14 : GND1+
+    pin15 : OUT1+
+    pin16 : OUT3+
+    pin17 : VCC1+
+    pin18 : FB1+
+    pin19 : Enable
+    pin20 : ADDSEL
+    pin21 : Gnd
+    pin22 : PGND
+    pin23 : VCC
+    pin24 : SW
+    pin25 : V5VDR
+    pin26 : CPGnd
+    pin27 : V5VCP
+    pin28 : CPN
+    pin29 : CPP
+    pin30 : Vboost
+    pin31 : FB3+
+    pin32 : VCC3+
+    pin33 : OUT3+
+    pin34 : OUT3+
+    pin35 : GND3+
+    pin36 : GND3-
+    pin37 : OUT3-
+    pin38 : OUT3-
+    pin39 : FB3-
+    pin40 : VCC3-
+    pin41 : VCC4-
+    pin42 : FB4-
+    pin43 : OUT4-
+    pin44 : OUT4-
+    pin45 : GND4-
+    pin46 : GND4+
+    pin47 : OUT4+
+    pin48 : OUT4+
+    pin49 : VCC4+
+    pin50 : FB4+
+    pin51 : CD_DIAG
+    pin52 : I2Cclk
+    pin53 : I2CData
+    pin54 : I2SData1 / SDI
+    pin55 : I2SData2 / SDO
+    pin56 : I2Sclk
+    pin57 : I2Sws
+    pin58 : Agnd
+    pin59 : AgndCap
+    pin60 : A5V
+    pin61 : Avdd
+    pin62 : HWMute
+    pin63 : FB2+
+    pin64 : VCC2+
+
+  pages:
+    Keywords : Keywords
+    Procedure :   Procedure
+    Trimming :   Trimming
+    Reference :   Reference
+    LDO5 :   LDO5
+    PLL :   PLL
+    Short_Diag :   Short_Diag
+    ADDSEL_HWMUTE :   ADDSEL_HWMUTE
+    CP :   CP
+    Buck :   Buck
+    DC Diagnostic :   DC Diagnostic
+    AC Diagnostic :   AC Diagnostic
+    FLL :   FLL
+    PGA-I Ch1 :   PGA-I Ch1
+    PGA-I Ch2 :   PGA-I Ch2
+    PGA-I Ch3 :   PGA-I Ch3
+    PGA-I Ch4 :   PGA-I Ch4
+    PGA-V Ch1 :   PGA-V Ch1
+    PGA-V Ch2 :   PGA-V Ch2
+    PGA-V Ch3 :   PGA-V Ch3
+    PGA-V Ch4 :   PGA-V Ch4
+    Class-D Signal Ch1 :   Class-D Signal Ch1
+    Drivers CLD Ch1 :   Drivers CLD Ch1
+    Class-D Signal Ch2 :   Class-D Signal Ch2
+    Drivers CLD Ch2 :   Drivers CLD Ch2
+    Class-D Signal Ch3 :   Class-D Signal Ch3
+    Drivers CLD Ch3 :   Drivers CLD Ch3
+    Class-D Signal Ch4 :   Class-D Signal Ch4
+    Drivers CLD Ch4 :   Drivers CLD Ch4

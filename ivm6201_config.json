@@ -1,0 +1,3429 @@
+device_address: 208
+registers:
+  BUCK_setting_1:
+    address: '0x7E'
+    attribute: NNNNNNNN
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2:
+        bit_attribute: N
+        field_name: bck_cap_mod_sel
+        lsb: '0'
+        msb: '2'
+        position: 2
+      bit3:
+        bit_attribute: N
+        field_name: sel_bck_out_5
+        lsb: null
+        msb: null
+        position: 3
+      bit4: {}
+      bit5: {}
+      bit6:
+        bit_attribute: N
+        field_name: bck_cap_filter_sel
+        lsb: '0'
+        msb: '2'
+        position: 6
+      bit7:
+        bit_attribute: N
+        field_name: bck_force_pwm
+        lsb: null
+        msb: null
+        position: 7
+    default_bin: 110101.0
+    default_hex: '0x35'
+  BUCK_setting_2:
+    address: '0x7F'
+    attribute: 00000NNN
+    bits:
+      bit0: {}
+      bit1:
+        bit_attribute: '0'
+        field_name: bck_sl_prog
+        lsb: '0'
+        msb: '1'
+        position: 1
+      bit2:
+        bit_attribute: '0'
+        field_name: bck_clk_sel
+        lsb: null
+        msb: null
+        position: 2
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7: {}
+    default_bin: 101.0
+    default_hex: '0x05'
+  CAL_measurement_reg_1:
+    address: '0x35'
+    attribute: 000000RR
+    bits:
+      bit0: {}
+      bit1:
+        bit_attribute: '0'
+        field_name: cal_meas
+        lsb: '8'
+        msb: '9'
+        position: 1
+      bit2: {}
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7: {}
+    default_bin: 0.0
+    default_hex: '0x00'
+  CAL_measurement_reg_2:
+    address: '0x36'
+    attribute: RRRRRRRR
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2: {}
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7:
+        bit_attribute: R
+        field_name: cal_meas
+        lsb: '0'
+        msb: '7'
+        position: 7
+    default_bin: 0.0
+    default_hex: '0x00'
+  CFIR_settings_1:
+    address: '0x5B'
+    attribute: NNNN00NN
+    bits:
+      bit0:
+        bit_attribute: N
+        field_name: ovs_mask_transient
+        lsb: null
+        msb: null
+        position: 0
+      bit1:
+        bit_attribute: N
+        field_name: dws_mask_transient
+        lsb: null
+        msb: null
+        position: 1
+      bit2: {}
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7:
+        bit_attribute: N
+        field_name: dws_mask_cnt
+        lsb: '0'
+        msb: '3'
+        position: 7
+    default_bin: 1000010.0
+    default_hex: '0x42'
+  CP_reg:
+    address: '0x7D'
+    attribute: 0NNNNNNN
+    bits:
+      bit0:
+        bit_attribute: '0'
+        field_name: cp_ss_mode
+        lsb: null
+        msb: null
+        position: 0
+      bit1:
+        bit_attribute: N
+        field_name: cp_dis_set
+        lsb: null
+        msb: null
+        position: 1
+      bit2: {}
+      bit3:
+        bit_attribute: N
+        field_name: cp_ss_set
+        lsb: '0'
+        msb: '1'
+        position: 3
+      bit4: {}
+      bit5:
+        bit_attribute: N
+        field_name: cp_sel
+        lsb: '0'
+        msb: '1'
+        position: 5
+      bit6:
+        bit_attribute: N
+        field_name: cp_num_tck
+        lsb: null
+        msb: null
+        position: 6
+      bit7: {}
+    default_bin: 1000000.0
+    default_hex: '0x40'
+  Calibration_Settings_1:
+    address: '0xE0'
+    attribute: NNNNNNNN
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2: {}
+      bit3:
+        bit_attribute: N
+        field_name: cal_offs_steps
+        lsb: '0'
+        msb: '3'
+        position: 3
+      bit4: {}
+      bit5:
+        bit_attribute: N
+        field_name: cal_offs_thr
+        lsb: '0'
+        msb: '1'
+        position: 5
+      bit6: {}
+      bit7:
+        bit_attribute: N
+        field_name: cal_offs_int_thr
+        lsb: '0'
+        msb: '1'
+        position: 7
+    default_bin: 10011000.0
+    default_hex: '0x98'
+  Calibration_Settings_2:
+    address: '0xE1'
+    attribute: 0NNN0NNN
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2:
+        bit_attribute: N
+        field_name: cal_offs_avg
+        lsb: '0'
+        msb: '2'
+        position: 2
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6:
+        bit_attribute: N
+        field_name: cal_grp_delay
+        lsb: '0'
+        msb: '2'
+        position: 6
+      bit7: {}
+    default_bin: 100.0
+    default_hex: '0x04'
+  Calibration_Settings_3:
+    address: '0xE2'
+    attribute: 0NNNNNNN
+    bits:
+      bit0:
+        bit_attribute: '0'
+        field_name: cal_offs_ignore_fault
+        lsb: null
+        msb: null
+        position: 0
+      bit1:
+        bit_attribute: N
+        field_name: cal_offs_inv_sign
+        lsb: null
+        msb: null
+        position: 1
+      bit2:
+        bit_attribute: N
+        field_name: cal_az_en
+        lsb: null
+        msb: null
+        position: 2
+      bit3:
+        bit_attribute: N
+        field_name: cal_az_meas_skip_avg
+        lsb: null
+        msb: null
+        position: 3
+      bit4: {}
+      bit5:
+        bit_attribute: N
+        field_name: cal_az_mode
+        lsb: '0'
+        msb: '1'
+        position: 5
+      bit6:
+        bit_attribute: N
+        field_name: cal_mode
+        lsb: null
+        msb: null
+        position: 6
+      bit7: {}
+    default_bin: 100.0
+    default_hex: '0x04'
+  Calibration_Settings_4:
+    address: '0xE3'
+    attribute: 00000NNN
+    bits:
+      bit0: {}
+      bit1:
+        bit_attribute: '0'
+        field_name: cal_sample_rate
+        lsb: '0'
+        msb: '1'
+        position: 1
+      bit2:
+        bit_attribute: '0'
+        field_name: cal_force_sample_rate
+        lsb: null
+        msb: null
+        position: 2
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7: {}
+    default_bin: 10001.0
+    default_hex: '0x11'
+  Calibration_Settings_5:
+    address: '0xE4'
+    attribute: 000N00NN
+    bits:
+      bit0: {}
+      bit1:
+        bit_attribute: '0'
+        field_name: cal_pga_gain
+        lsb: '0'
+        msb: '1'
+        position: 1
+      bit2: {}
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7: {}
+    default_bin: 10010.0
+    default_hex: '0x12'
+  Calibration_Settings_6:
+    address: '0xE5'
+    attribute: 0000PPPP
+    bits:
+      bit0:
+        bit_attribute: '0'
+        field_name: cal_offs_en_ch1
+        lsb: null
+        msb: null
+        position: 0
+      bit1:
+        bit_attribute: '0'
+        field_name: cal_offs_en_ch2
+        lsb: null
+        msb: null
+        position: 1
+      bit2:
+        bit_attribute: '0'
+        field_name: cal_offs_en_ch3
+        lsb: null
+        msb: null
+        position: 2
+      bit3:
+        bit_attribute: '0'
+        field_name: cal_offs_en_ch4
+        lsb: null
+        msb: null
+        position: 3
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7: {}
+    default_bin: 0.0
+    default_hex: '0x00'
+  Calibration_Settings_7:
+    address: '0xE6'
+    attribute: RRRRRRRR
+    bits:
+      bit0:
+        bit_attribute: R
+        field_name: cal_offs_end_ch1
+        lsb: null
+        msb: null
+        position: 0
+      bit1:
+        bit_attribute: R
+        field_name: cal_offs_result_ch1
+        lsb: null
+        msb: null
+        position: 1
+      bit2:
+        bit_attribute: R
+        field_name: cal_offs_end_ch2
+        lsb: null
+        msb: null
+        position: 2
+      bit3:
+        bit_attribute: R
+        field_name: cal_offs_result_ch2
+        lsb: null
+        msb: null
+        position: 3
+      bit4:
+        bit_attribute: R
+        field_name: cal_offs_end_ch3
+        lsb: null
+        msb: null
+        position: 4
+      bit5:
+        bit_attribute: R
+        field_name: cal_offs_result_ch3
+        lsb: null
+        msb: null
+        position: 5
+      bit6:
+        bit_attribute: R
+        field_name: cal_offs_end_ch4
+        lsb: null
+        msb: null
+        position: 6
+      bit7:
+        bit_attribute: R
+        field_name: cal_offs_result_ch4
+        lsb: null
+        msb: null
+        position: 7
+    default_bin: 0.0
+    default_hex: '0x00'
+  Calibration_Settings_8:
+    address: '0xDF'
+    attribute: RRRRRRRR
+    bits:
+      bit0:
+        bit_attribute: R
+        field_name: live_cal_result_gain_100_ch1
+        lsb: null
+        msb: null
+        position: 0
+      bit1:
+        bit_attribute: R
+        field_name: live_cal_result_gain_100_ch2
+        lsb: null
+        msb: null
+        position: 1
+      bit2:
+        bit_attribute: R
+        field_name: live_cal_result_gain_100_ch3
+        lsb: null
+        msb: null
+        position: 2
+      bit3:
+        bit_attribute: R
+        field_name: live_cal_result_gain_100_ch4
+        lsb: null
+        msb: null
+        position: 3
+      bit4:
+        bit_attribute: R
+        field_name: live_cal_result_gain_011_ch1
+        lsb: null
+        msb: null
+        position: 4
+      bit5:
+        bit_attribute: R
+        field_name: live_cal_result_gain_011_ch2
+        lsb: null
+        msb: null
+        position: 5
+      bit6:
+        bit_attribute: R
+        field_name: live_cal_result_gain_011_ch3
+        lsb: null
+        msb: null
+        position: 6
+      bit7:
+        bit_attribute: R
+        field_name: live_cal_result_gain_011_ch4
+        lsb: null
+        msb: null
+        position: 7
+    default_bin: 0.0
+    default_hex: '0x00'
+  Calibration_status_reg_1:
+    address: '0xF1'
+    attribute: 000RRRRR
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2: {}
+      bit3: {}
+      bit4:
+        bit_attribute: R
+        field_name: cal_az_meas_ext
+        lsb: '16'
+        msb: '20'
+        position: 4
+      bit5: {}
+      bit6: {}
+      bit7: {}
+    default_bin: 0.0
+    default_hex: '0x00'
+  Calibration_status_reg_2:
+    address: '0xF2'
+    attribute: RRRRRRRR
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2: {}
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7:
+        bit_attribute: R
+        field_name: cal_az_meas_ext
+        lsb: '8'
+        msb: '15'
+        position: 7
+    default_bin: 0.0
+    default_hex: '0x00'
+  Calibration_status_reg_3:
+    address: '0xF3'
+    attribute: RRRRRRRR
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2: {}
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7:
+        bit_attribute: R
+        field_name: cal_az_meas_ext
+        lsb: '0'
+        msb: '7'
+        position: 7
+    default_bin: 0.0
+    default_hex: '0x00'
+  Calibration_status_reg_4:
+    address: '0xF4'
+    attribute: 000RRRRR
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2: {}
+      bit3: {}
+      bit4:
+        bit_attribute: R
+        field_name: cal_az_meas_int
+        lsb: '16'
+        msb: '20'
+        position: 4
+      bit5: {}
+      bit6: {}
+      bit7: {}
+    default_bin: 0.0
+    default_hex: '0x00'
+  Calibration_status_reg_5:
+    address: '0xF5'
+    attribute: RRRRRRRR
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2: {}
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7:
+        bit_attribute: R
+        field_name: cal_az_meas_int
+        lsb: '8'
+        msb: '15'
+        position: 7
+    default_bin: 0.0
+    default_hex: '0x00'
+  Calibration_status_reg_6:
+    address: '0xF6'
+    attribute: RRRRRRRR
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2: {}
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7:
+        bit_attribute: R
+        field_name: cal_az_meas_int
+        lsb: '0'
+        msb: '7'
+        position: 7
+    default_bin: 0.0
+    default_hex: '0x00'
+  Channel_en_reg:
+    address: '0x39'
+    attribute: 0000NNNN
+    bits:
+      bit0:
+        bit_attribute: '0'
+        field_name: en_ch1
+        lsb: null
+        msb: null
+        position: 0
+      bit1:
+        bit_attribute: '0'
+        field_name: en_ch2
+        lsb: null
+        msb: null
+        position: 1
+      bit2:
+        bit_attribute: '0'
+        field_name: en_ch3
+        lsb: null
+        msb: null
+        position: 2
+      bit3:
+        bit_attribute: '0'
+        field_name: en_ch4
+        lsb: null
+        msb: null
+        position: 3
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7: {}
+    default_bin: 1111.0
+    default_hex: '0x0F'
+  ClassD_reg_2:
+    address: '0x92'
+    attribute: NNNNNNNN
+    bits:
+      bit0: {}
+      bit1:
+        bit_attribute: N
+        field_name: cld_2ndint_cur
+        lsb: '0'
+        msb: '1'
+        position: 1
+      bit2: {}
+      bit3:
+        bit_attribute: N
+        field_name: cld_3rdint_cur
+        lsb: '0'
+        msb: '1'
+        position: 3
+      bit4:
+        bit_attribute: N
+        field_name: cld_drv_ls_on_sr
+        lsb: null
+        msb: null
+        position: 4
+      bit5:
+        bit_attribute: N
+        field_name: cld_drv_ls_off_sr
+        lsb: null
+        msb: null
+        position: 5
+      bit6:
+        bit_attribute: N
+        field_name: cld_drv_hs_on_sr
+        lsb: null
+        msb: null
+        position: 6
+      bit7:
+        bit_attribute: N
+        field_name: cld_drv_hs_off_sr
+        lsb: null
+        msb: null
+        position: 7
+    default_bin: 11110101.0
+    default_hex: '0xF5'
+  ClassD_reg_4:
+    address: '0x93'
+    attribute: NNNNNNNN
+    bits:
+      bit0:
+        bit_attribute: N
+        field_name: cld_ramp_dith_en
+        lsb: null
+        msb: null
+        position: 0
+      bit1:
+        bit_attribute: N
+        field_name: fllvco_hook_en
+        lsb: null
+        msb: null
+        position: 1
+      bit2: {}
+      bit3:
+        bit_attribute: N
+        field_name: cld_1stint_cur
+        lsb: '0'
+        msb: '1'
+        position: 3
+      bit4:
+        bit_attribute: N
+        field_name: cld_force_intfb_en
+        lsb: null
+        msb: null
+        position: 4
+      bit5:
+        bit_attribute: N
+        field_name: cld_tsdn_en
+        lsb: null
+        msb: null
+        position: 5
+      bit6:
+        bit_attribute: N
+        field_name: cld_comp_curr_x2
+        lsb: null
+        msb: null
+        position: 6
+      bit7:
+        bit_attribute: N
+        field_name: cld_drv_strong_onoff_en
+        lsb: null
+        msb: null
+        position: 7
+    default_bin: 10010.0
+    default_hex: '0x12'
+  ClassD_reg_5:
+    address: '0x94'
+    attribute: 0000NNNN
+    bits:
+      bit0: {}
+      bit1:
+        bit_attribute: '0'
+        field_name: cld_ramp_dith_period
+        lsb: '8'
+        msb: '9'
+        position: 1
+      bit2:
+        bit_attribute: '0'
+        field_name: cld_cp_en
+        lsb: null
+        msb: null
+        position: 2
+      bit3:
+        bit_attribute: '0'
+        field_name: cld_force_ppart_en
+        lsb: null
+        msb: null
+        position: 3
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7: {}
+    default_bin: 1100000.0
+    default_hex: '0x60'
+  ClassD_reg_6:
+    address: '0x95'
+    attribute: NNNNNNNN
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2: {}
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7:
+        bit_attribute: N
+        field_name: cld_ramp_dith_period
+        lsb: '0'
+        msb: '7'
+        position: 7
+    default_bin: 10100.0
+    default_hex: '0x14'
+  ClassD_reg_7:
+    address: '0x97'
+    attribute: NNNNNNNN
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2: {}
+      bit3: {}
+      bit4:
+        bit_attribute: N
+        field_name: cld_ramp_dith_ampl_l
+        lsb: '0'
+        msb: '4'
+        position: 4
+      bit5:
+        bit_attribute: N
+        field_name: (spare)
+        lsb: null
+        msb: null
+        position: 5
+      bit6:
+        bit_attribute: N
+        field_name: cld_ramp_dith_amp_mode
+        lsb: null
+        msb: null
+        position: 6
+      bit7:
+        bit_attribute: N
+        field_name: cld_ramp_dith_amp_en
+        lsb: null
+        msb: null
+        position: 7
+    default_bin: 10000.0
+    default_hex: '0x10'
+  ClassD_reg_8:
+    address: '0x9F'
+    attribute: NNNNNNNN
+    bits:
+      bit0:
+        bit_attribute: N
+        field_name: cld_force_2fb_on_ch1
+        lsb: null
+        msb: null
+        position: 0
+      bit1:
+        bit_attribute: N
+        field_name: cld_force_2fb_on_ch2
+        lsb: null
+        msb: null
+        position: 1
+      bit2:
+        bit_attribute: N
+        field_name: cld_force_2fb_on_ch3
+        lsb: null
+        msb: null
+        position: 2
+      bit3:
+        bit_attribute: N
+        field_name: cld_force_2fb_on_ch4
+        lsb: null
+        msb: null
+        position: 3
+      bit4: {}
+      bit5:
+        bit_attribute: N
+        field_name: cld_psrr_ota_cur
+        lsb: '0'
+        msb: '1'
+        position: 5
+      bit6:
+        bit_attribute: N
+        field_name: cld_off_det_vth_prog
+        lsb: null
+        msb: null
+        position: 6
+      bit7:
+        bit_attribute: N
+        field_name: cld_rcm_dis
+        lsb: null
+        msb: null
+        position: 7
+    default_bin: 10000.0
+    default_hex: '0x10'
+  ClassD_reg_9:
+    address: '0x99'
+    attribute: 0NNN0NNN
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2:
+        bit_attribute: N
+        field_name: cld_force_intfb_wdg_time
+        lsb: '0'
+        msb: '2'
+        position: 2
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6:
+        bit_attribute: N
+        field_name: cld_force_ppart_wdg_time
+        lsb: '0'
+        msb: '2'
+        position: 6
+      bit7: {}
+    default_bin: 1000100.0
+    default_hex: '0x44'
+  Clock_monitor_settings_1:
+    address: '0x55'
+    attribute: NNNNNNNN
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2: {}
+      bit3:
+        bit_attribute: N
+        field_name: tdm_fsyn_mnt_mask_cnt
+        lsb: '0'
+        msb: '3'
+        position: 3
+      bit4: {}
+      bit5:
+        bit_attribute: N
+        field_name: tdm_fsyn_mnt_mode
+        lsb: '0'
+        msb: '1'
+        position: 5
+      bit6:
+        bit_attribute: N
+        field_name: tdm_fsyn_mnt_en
+        lsb: null
+        msb: null
+        position: 6
+      bit7:
+        bit_attribute: N
+        field_name: tdm_fsyn_rate_mnt_en
+        lsb: null
+        msb: null
+        position: 7
+    default_bin: 11100001.0
+    default_hex: '0xE1'
+  Clock_monitor_settings_2:
+    address: '0x56'
+    attribute: 0000NN0N
+    bits:
+      bit0:
+        bit_attribute: '0'
+        field_name: tdm_osr_mnt_mode
+        lsb: null
+        msb: null
+        position: 0
+      bit1: {}
+      bit2: {}
+      bit3:
+        bit_attribute: '0'
+        field_name: tdm_bclk_mnt_mode
+        lsb: '0'
+        msb: '1'
+        position: 3
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7: {}
+    default_bin: 1101.0
+    default_hex: '0x0D'
+  Config_REG1:
+    address: '0x0D'
+    attribute: 0000NNNN
+    bits:
+      bit0: {}
+      bit1:
+        bit_attribute: '0'
+        field_name: int_ac_vol_sel
+        lsb: '0'
+        msb: '1'
+        position: 1
+      bit2: {}
+      bit3:
+        bit_attribute: '0'
+        field_name: ac_thresh_sel
+        lsb: '0'
+        msb: '1'
+        position: 3
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7: {}
+    default_bin: 100.0
+    default_hex: '0x04'
+  Device_Info:
+    address: '0xFF'
+    attribute: RRRRRRRR
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2:
+        bit_attribute: R
+        field_name: version_id
+        lsb: '0'
+        msb: '2'
+        position: 2
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7:
+        bit_attribute: R
+        field_name: device_id
+        lsb: '0'
+        msb: '4'
+        position: 7
+    default_bin: 11111000.0
+    default_hex: '0xF8'
+  Diag_state_Reg:
+    address: '0xE9'
+    attribute: 0000RRRR
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2: {}
+      bit3:
+        bit_attribute: '0'
+        field_name: diag_state
+        lsb: '0'
+        msb: '3'
+        position: 3
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7: {}
+    default_bin: 0.0
+    default_hex: '0x00'
+  Enables_settings_1:
+    address: '0x75'
+    attribute: 000000NN
+    bits:
+      bit0:
+        bit_attribute: '0'
+        field_name: pll_clkmux_en
+        lsb: null
+        msb: null
+        position: 0
+      bit1:
+        bit_attribute: '0'
+        field_name: pll_en
+        lsb: null
+        msb: null
+        position: 1
+      bit2: {}
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7: {}
+    default_bin: 11.0
+    default_hex: '0x03'
+  Enables_settings_2:
+    address: '0x76'
+    attribute: 000000NN
+    bits:
+      bit0:
+        bit_attribute: '0'
+        field_name: tdm_en
+        lsb: null
+        msb: null
+        position: 0
+      bit1:
+        bit_attribute: '0'
+        field_name: saradc_en
+        lsb: null
+        msb: null
+        position: 1
+      bit2: {}
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7: {}
+    default_bin: 11.0
+    default_hex: '0x03'
+  Enables_settings_3:
+    address: '0x77'
+    attribute: 000000NN
+    bits:
+      bit0: {}
+      bit1:
+        bit_attribute: '0'
+        field_name: hpf_inc_step
+        lsb: '0'
+        msb: '1'
+        position: 1
+      bit2: {}
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7: {}
+    default_bin: 0.0
+    default_hex: '0x00'
+  Enables_settings_4:
+    address: '0x78'
+    attribute: 00000NNN
+    bits:
+      bit0: {}
+      bit1:
+        bit_attribute: '0'
+        field_name: sp_sel
+        lsb: '0'
+        msb: '1'
+        position: 1
+      bit2:
+        bit_attribute: '0'
+        field_name: sp_en
+        lsb: null
+        msb: null
+        position: 2
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7: {}
+    default_bin: 110.0
+    default_hex: '0x06'
+  Enables_settings_5:
+    address: '0x79'
+    attribute: 000000N0
+    bits:
+      bit0: {}
+      bit1:
+        bit_attribute: '0'
+        field_name: data_gating
+        lsb: null
+        msb: null
+        position: 1
+      bit2: {}
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7: {}
+    default_bin: 0.0
+    default_hex: '0x00'
+  Fll_reg:
+    address: '0xA0'
+    attribute: NNNNNNNN
+    bits:
+      bit0: {}
+      bit1:
+        bit_attribute: N
+        field_name: fllvco_amp
+        lsb: '0'
+        msb: '1'
+        position: 1
+      bit2:
+        bit_attribute: N
+        field_name: fllfd_inv
+        lsb: null
+        msb: null
+        position: 2
+      bit3:
+        bit_attribute: N
+        field_name: fllvco_fixgain
+        lsb: null
+        msb: null
+        position: 3
+      bit4:
+        bit_attribute: N
+        field_name: cld_clamp_en
+        lsb: null
+        msb: null
+        position: 4
+      bit5:
+        bit_attribute: N
+        field_name: cld_psrr_en
+        lsb: null
+        msb: null
+        position: 5
+      bit6: {}
+      bit7:
+        bit_attribute: N
+        field_name: cld_ramp_fctrl
+        lsb: '0'
+        msb: '1'
+        position: 7
+    default_bin: 111000.0
+    default_hex: '0x38'
+  Interrupt_mask_register_1:
+    address: '0x37'
+    attribute: 0000000N
+    bits:
+      bit0:
+        bit_attribute: '0'
+        field_name: int_clear_mode
+        lsb: null
+        msb: null
+        position: 0
+      bit1: {}
+      bit2: {}
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7: {}
+    default_bin: 0.0
+    default_hex: '0x00'
+  Interrupt_mask_register_2:
+    address: '0x2A'
+    attribute: 0NNNNNNN
+    bits:
+      bit0:
+        bit_attribute: '0'
+        field_name: cp_fault_mask
+        lsb: null
+        msb: null
+        position: 0
+      bit1:
+        bit_attribute: N
+        field_name: buck_fault_mask
+        lsb: null
+        msb: null
+        position: 1
+      bit2:
+        bit_attribute: N
+        field_name: cp_timer_fault_mask
+        lsb: null
+        msb: null
+        position: 2
+      bit3:
+        bit_attribute: N
+        field_name: buck_timer_fault_mask
+        lsb: null
+        msb: null
+        position: 3
+      bit4:
+        bit_attribute: N
+        field_name: fsyn_fault_mask
+        lsb: null
+        msb: null
+        position: 4
+      bit5:
+        bit_attribute: N
+        field_name: bclk_fault_mask
+        lsb: null
+        msb: null
+        position: 5
+      bit6:
+        bit_attribute: N
+        field_name: vcc_ov_fault_mask
+        lsb: null
+        msb: null
+        position: 6
+      bit7: {}
+    default_bin: 0.0
+    default_hex: '0x00'
+  Interrupt_mask_register_3:
+    address: '0x2C'
+    attribute: NNNNNNNN
+    bits:
+      bit0:
+        bit_attribute: N
+        field_name: gnd_short_fault_ch1_mask
+        lsb: null
+        msb: null
+        position: 0
+      bit1:
+        bit_attribute: N
+        field_name: vcc_short_fault_ch1_mask
+        lsb: null
+        msb: null
+        position: 1
+      bit2:
+        bit_attribute: N
+        field_name: gnd_short_fault_ch2_mask
+        lsb: null
+        msb: null
+        position: 2
+      bit3:
+        bit_attribute: N
+        field_name: vcc_short_fault_ch2_mask
+        lsb: null
+        msb: null
+        position: 3
+      bit4:
+        bit_attribute: N
+        field_name: gnd_short_fault_ch3_mask
+        lsb: null
+        msb: null
+        position: 4
+      bit5:
+        bit_attribute: N
+        field_name: vcc_short_fault_ch3_mask
+        lsb: null
+        msb: null
+        position: 5
+      bit6:
+        bit_attribute: N
+        field_name: gnd_short_fault_ch4_mask
+        lsb: null
+        msb: null
+        position: 6
+      bit7:
+        bit_attribute: N
+        field_name: vcc_short_fault_ch4_mask
+        lsb: null
+        msb: null
+        position: 7
+    default_bin: 0.0
+    default_hex: '0x00'
+  Interrupt_status_register_1:
+    address: '0x27'
+    attribute: IIIIIIII
+    bits:
+      bit0:
+        bit_attribute: I
+        field_name: pwr_startup_end
+        lsb: null
+        msb: null
+        position: 0
+      bit1:
+        bit_attribute: I
+        field_name: frame_check_fault
+        lsb: null
+        msb: null
+        position: 1
+      bit2:
+        bit_attribute: I
+        field_name: pll_lock_fault
+        lsb: null
+        msb: null
+        position: 2
+      bit3:
+        bit_attribute: I
+        field_name: pll_lock_ok
+        lsb: null
+        msb: null
+        position: 3
+      bit4:
+        bit_attribute: I
+        field_name: cld_ocp_fault_ch1
+        lsb: null
+        msb: null
+        position: 4
+      bit5:
+        bit_attribute: I
+        field_name: cld_ocp_fault_ch2
+        lsb: null
+        msb: null
+        position: 5
+      bit6:
+        bit_attribute: I
+        field_name: cld_ocp_fault_ch3
+        lsb: null
+        msb: null
+        position: 6
+      bit7:
+        bit_attribute: I
+        field_name: cld_ocp_fault_ch4
+        lsb: null
+        msb: null
+        position: 7
+    default_bin: 0.0
+    default_hex: '0x00'
+  Interrupt_status_register_2:
+    address: '0x29'
+    attribute: 0IIIIIII
+    bits:
+      bit0:
+        bit_attribute: '0'
+        field_name: cp_fault
+        lsb: null
+        msb: null
+        position: 0
+      bit1:
+        bit_attribute: I
+        field_name: buck_fault
+        lsb: null
+        msb: null
+        position: 1
+      bit2:
+        bit_attribute: I
+        field_name: cp_timer_fault
+        lsb: null
+        msb: null
+        position: 2
+      bit3:
+        bit_attribute: I
+        field_name: buck_timer_fault
+        lsb: null
+        msb: null
+        position: 3
+      bit4:
+        bit_attribute: I
+        field_name: fsyn_fault
+        lsb: null
+        msb: null
+        position: 4
+      bit5:
+        bit_attribute: I
+        field_name: bclk_fault
+        lsb: null
+        msb: null
+        position: 5
+      bit6:
+        bit_attribute: I
+        field_name: vcc_ov_fault
+        lsb: null
+        msb: null
+        position: 6
+      bit7: {}
+    default_bin: 0.0
+    default_hex: '0x00'
+  Interrupt_status_register_3:
+    address: '0x2B'
+    attribute: IIIIIIII
+    bits:
+      bit0:
+        bit_attribute: I
+        field_name: gnd_short_fault_ch1
+        lsb: null
+        msb: null
+        position: 0
+      bit1:
+        bit_attribute: I
+        field_name: vcc_short_fault_ch1
+        lsb: null
+        msb: null
+        position: 1
+      bit2:
+        bit_attribute: I
+        field_name: gnd_short_fault_ch2
+        lsb: null
+        msb: null
+        position: 2
+      bit3:
+        bit_attribute: I
+        field_name: vcc_short_fault_ch2
+        lsb: null
+        msb: null
+        position: 3
+      bit4:
+        bit_attribute: I
+        field_name: gnd_short_fault_ch3
+        lsb: null
+        msb: null
+        position: 4
+      bit5:
+        bit_attribute: I
+        field_name: vcc_short_fault_ch3
+        lsb: null
+        msb: null
+        position: 5
+      bit6:
+        bit_attribute: I
+        field_name: gnd_short_fault_ch4
+        lsb: null
+        msb: null
+        position: 6
+      bit7:
+        bit_attribute: I
+        field_name: vcc_short_fault_ch4
+        lsb: null
+        msb: null
+        position: 7
+    default_bin: 0.0
+    default_hex: '0x00'
+  MFSM_state_Reg:
+    address: '0xEA'
+    attribute: 000RRRRR
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2: {}
+      bit3: {}
+      bit4:
+        bit_attribute: R
+        field_name: mfsm_state
+        lsb: '0'
+        msb: '4'
+        position: 4
+      bit5: {}
+      bit6: {}
+      bit7: {}
+    default_bin: 0.0
+    default_hex: '0x00'
+  Modulator_reg_1:
+    address: '0x88'
+    attribute: 0NNNNNNN
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2: {}
+      bit3:
+        bit_attribute: N
+        field_name: pwm_filt_band_sel
+        lsb: '0'
+        msb: '3'
+        position: 3
+      bit4: {}
+      bit5: {}
+      bit6:
+        bit_attribute: N
+        field_name: pwm_hys_dly
+        lsb: '0'
+        msb: '2'
+        position: 6
+      bit7: {}
+    default_bin: 110111.0
+    default_hex: '0x37'
+  Modulator_reg_2:
+    address: '0x89'
+    attribute: NNNNNNNN
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2: {}
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7:
+        bit_attribute: N
+        field_name: pwm_hys_fb
+        lsb: '0'
+        msb: '7'
+        position: 7
+    default_bin: 1110001.0
+    default_hex: '0x71'
+  Modulator_reg_3:
+    address: '0x8A'
+    attribute: 00NNNNNN
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2: {}
+      bit3: {}
+      bit4: {}
+      bit5:
+        bit_attribute: N
+        field_name: pwm_bside_dly
+        lsb: '0'
+        msb: '5'
+        position: 5
+      bit6: {}
+      bit7: {}
+    default_bin: 1100.0
+    default_hex: '0x0C'
+  Modulator_reg_4:
+    address: '0x8B'
+    attribute: 000NNNNN
+    bits:
+      bit0:
+        bit_attribute: '0'
+        field_name: pwm_data_inv
+        lsb: null
+        msb: null
+        position: 0
+      bit1:
+        bit_attribute: '0'
+        field_name: pwm_clk_pol
+        lsb: null
+        msb: null
+        position: 1
+      bit2:
+        bit_attribute: '0'
+        field_name: pwm_offs_int_en
+        lsb: null
+        msb: null
+        position: 2
+      bit3:
+        bit_attribute: N
+        field_name: pwm_offs_int_fs
+        lsb: null
+        msb: null
+        position: 3
+      bit4:
+        bit_attribute: N
+        field_name: pwm_offs_comp_en
+        lsb: null
+        msb: null
+        position: 4
+      bit5: {}
+      bit6: {}
+      bit7: {}
+    default_bin: 10100.0
+    default_hex: '0x14'
+  Modulator_reg_5:
+    address: '0x8C'
+    attribute: 000N0NNN
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2:
+        bit_attribute: '0'
+        field_name: pwm_filt_size
+        lsb: '0'
+        msb: '2'
+        position: 2
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7: {}
+    default_bin: 0.0
+    default_hex: '0x00'
+  NGIF_settings_1:
+    address: '0x50'
+    attribute: NNNNNNNN
+    bits:
+      bit0:
+        bit_attribute: N
+        field_name: ngif_en
+        lsb: null
+        msb: null
+        position: 0
+      bit1:
+        bit_attribute: N
+        field_name: ngif_mask
+        lsb: null
+        msb: null
+        position: 1
+      bit2:
+        bit_attribute: N
+        field_name: ngif_window_en
+        lsb: null
+        msb: null
+        position: 2
+      bit3:
+        bit_attribute: N
+        field_name: ngif_hyst_en
+        lsb: null
+        msb: null
+        position: 3
+      bit4: {}
+      bit5:
+        bit_attribute: N
+        field_name: ngif_filt_sample
+        lsb: '0'
+        msb: '1'
+        position: 5
+      bit6: {}
+      bit7:
+        bit_attribute: N
+        field_name: ngif_filt_ratio
+        lsb: '0'
+        msb: '1'
+        position: 7
+    default_bin: 1010.0
+    default_hex: '0x0A'
+  NGIF_settings_4:
+    address: '0x51'
+    attribute: 000000NN
+    bits:
+      bit0: {}
+      bit1:
+        bit_attribute: '0'
+        field_name: ngif_thresh
+        lsb: '0'
+        msb: '1'
+        position: 1
+      bit2: {}
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7: {}
+    default_bin: 10000.0
+    default_hex: '0x10'
+  OTP_check_reg:
+    address: '0x38'
+    attribute: 0000000R
+    bits:
+      bit0:
+        bit_attribute: '0'
+        field_name: otp_check_err
+        lsb: null
+        msb: null
+        position: 0
+      bit1: {}
+      bit2: {}
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7: {}
+    default_bin: 0.0
+    default_hex: '0x00'
+  Offset_Reg:
+    address: '0xEB'
+    attribute: RRRRRRRR
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2: {}
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7:
+        bit_attribute: R
+        field_name: input_offset_detected
+        lsb: '0'
+        msb: '7'
+        position: 7
+    default_bin: 0.0
+    default_hex: '0x00'
+  Output_Clipping_reg:
+    address: '0xA6'
+    attribute: 00000NNN
+    bits:
+      bit0: {}
+      bit1:
+        bit_attribute: '0'
+        field_name: clip_vbat_reduction
+        lsb: '0'
+        msb: '1'
+        position: 1
+      bit2:
+        bit_attribute: '0'
+        field_name: clip_mode2_threshold_sel
+        lsb: null
+        msb: null
+        position: 2
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7: {}
+    default_bin: 10.0
+    default_hex: '0x02'
+  PAD_settings:
+    address: '0xFC'
+    attribute: 000P0N00
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2:
+        bit_attribute: '0'
+        field_name: tdm_pad_di_en
+        lsb: null
+        msb: null
+        position: 2
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7: {}
+    default_bin: 100.0
+    default_hex: '0x04'
+  PATTERN_SETTINGS_1:
+    address: '0xC0'
+    attribute: NNNNNNNN
+    bits:
+      bit0:
+        bit_attribute: N
+        field_name: ptn_en
+        lsb: null
+        msb: null
+        position: 0
+      bit1:
+        bit_attribute: N
+        field_name: ptn_dith_type
+        lsb: null
+        msb: null
+        position: 1
+      bit2:
+        bit_attribute: N
+        field_name: (spare)
+        lsb: null
+        msb: null
+        position: 2
+      bit3:
+        bit_attribute: N
+        field_name: (spare)
+        lsb: null
+        msb: null
+        position: 3
+      bit4:
+        bit_attribute: N
+        field_name: (spare)
+        lsb: null
+        msb: null
+        position: 4
+      bit5:
+        bit_attribute: N
+        field_name: (spare)
+        lsb: null
+        msb: null
+        position: 5
+      bit6:
+        bit_attribute: N
+        field_name: (spare)
+        lsb: null
+        msb: null
+        position: 6
+      bit7:
+        bit_attribute: N
+        field_name: (spare)
+        lsb: null
+        msb: null
+        position: 7
+    default_bin: 0.0
+    default_hex: '0x00'
+  PATTERN_SETTINGS_2:
+    address: '0xC1'
+    attribute: NNNNNNNN
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2: {}
+      bit3: {}
+      bit4:
+        bit_attribute: N
+        field_name: ptn_fre
+        lsb: '8'
+        msb: '12'
+        position: 4
+      bit5:
+        bit_attribute: N
+        field_name: (spare)
+        lsb: null
+        msb: null
+        position: 5
+      bit6:
+        bit_attribute: N
+        field_name: (spare)
+        lsb: null
+        msb: null
+        position: 6
+      bit7:
+        bit_attribute: N
+        field_name: (spare)
+        lsb: null
+        msb: null
+        position: 7
+    default_bin: 0.0
+    default_hex: '0x00'
+  PATTERN_SETTINGS_3:
+    address: '0xC2'
+    attribute: NNNNNNNN
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2: {}
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7:
+        bit_attribute: N
+        field_name: ptn_fre
+        lsb: '0'
+        msb: '7'
+        position: 7
+    default_bin: 0.0
+    default_hex: '0x00'
+  PATTERN_SETTINGS_4:
+    address: '0xC3'
+    attribute: NNNNNNNN
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2: {}
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7:
+        bit_attribute: N
+        field_name: ptn_ofs
+        lsb: '8'
+        msb: '15'
+        position: 7
+    default_bin: 0.0
+    default_hex: '0x00'
+  PATTERN_SETTINGS_5:
+    address: '0xC4'
+    attribute: NNNNNNNN
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2: {}
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7:
+        bit_attribute: N
+        field_name: ptn_ofs
+        lsb: '0'
+        msb: '7'
+        position: 7
+    default_bin: 0.0
+    default_hex: '0x00'
+  PATTERN_SETTINGS_6:
+    address: '0xC5'
+    attribute: 0NNNNNNN
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2: {}
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6:
+        bit_attribute: N
+        field_name: ptn_ramp_time_step
+        lsb: '0'
+        msb: '6'
+        position: 6
+      bit7: {}
+    default_bin: 100.0
+    default_hex: '0x04'
+  PATTERN_SETTINGS_7:
+    address: '0xC6'
+    attribute: 000000NN
+    bits:
+      bit0: {}
+      bit1:
+        bit_attribute: '0'
+        field_name: ptn_vol_sel
+        lsb: '8'
+        msb: '9'
+        position: 1
+      bit2: {}
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7: {}
+    default_bin: 0.0
+    default_hex: '0x00'
+  PATTERN_SETTINGS_8:
+    address: '0xC7'
+    attribute: NNNNNNNN
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2: {}
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7:
+        bit_attribute: N
+        field_name: ptn_vol_sel
+        lsb: '0'
+        msb: '7'
+        position: 7
+    default_bin: 0.0
+    default_hex: '0x00'
+  PLL_settings_1:
+    address: '0x80'
+    attribute: NNNN000N
+    bits:
+      bit0:
+        bit_attribute: N
+        field_name: pll_n
+        lsb: null
+        msb: '8'
+        position: 0
+      bit1: {}
+      bit2: {}
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7:
+        bit_attribute: N
+        field_name: pll_post_n
+        lsb: '0'
+        msb: '3'
+        position: 7
+    default_bin: 10000.0
+    default_hex: '0x10'
+  PLL_settings_2:
+    address: '0x81'
+    attribute: NNNNNNNN
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2: {}
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7:
+        bit_attribute: N
+        field_name: pll_n
+        lsb: '0'
+        msb: '7'
+        position: 7
+    default_bin: 100000.0
+    default_hex: '0x20'
+  PLL_settings_3:
+    address: '0x82'
+    attribute: NNNNRRNN
+    bits:
+      bit0:
+        bit_attribute: N
+        field_name: pll_refclk_sel
+        lsb: null
+        msb: null
+        position: 0
+      bit1:
+        bit_attribute: N
+        field_name: pll_outclk_sel
+        lsb: null
+        msb: null
+        position: 1
+      bit2: {}
+      bit3:
+        bit_attribute: N
+        field_name: pll_refclk_sel_read
+        lsb: '0'
+        msb: '1'
+        position: 3
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7:
+        bit_attribute: N
+        field_name: pll_p
+        lsb: '0'
+        msb: '3'
+        position: 7
+    default_bin: 10000.0
+    default_hex: '0x10'
+  PLL_settings_4:
+    address: '0x83'
+    attribute: 00NNNNNN
+    bits:
+      bit0: {}
+      bit1:
+        bit_attribute: '0'
+        field_name: pll_cp_ctrl
+        lsb: '0'
+        msb: '1'
+        position: 1
+      bit2: {}
+      bit3:
+        bit_attribute: N
+        field_name: pll_vco_ctrl
+        lsb: '0'
+        msb: '1'
+        position: 3
+      bit4:
+        bit_attribute: N
+        field_name: pll_pfd_sel
+        lsb: null
+        msb: null
+        position: 4
+      bit5:
+        bit_attribute: N
+        field_name: pll_vco_en_fix_bias
+        lsb: null
+        msb: null
+        position: 5
+      bit6: {}
+      bit7: {}
+    default_bin: 101001.0
+    default_hex: '0x29'
+  PLL_settings_5:
+    address: '0x84'
+    attribute: 000NNNNN
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2: {}
+      bit3: {}
+      bit4:
+        bit_attribute: N
+        field_name: pll_ldet_cnt
+        lsb: '0'
+        msb: '4'
+        position: 4
+      bit5: {}
+      bit6: {}
+      bit7: {}
+    default_bin: 11111.0
+    default_hex: '0x1F'
+  PLL_settings_6:
+    address: '0x85'
+    attribute: 00NN0NNN
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2:
+        bit_attribute: N
+        field_name: pll_lock_cnt
+        lsb: '0'
+        msb: '2'
+        position: 2
+      bit3: {}
+      bit4:
+        bit_attribute: '0'
+        field_name: pll_lock_skip
+        lsb: null
+        msb: null
+        position: 4
+      bit5:
+        bit_attribute: N
+        field_name: pll_auto_conf
+        lsb: null
+        msb: null
+        position: 5
+      bit6: {}
+      bit7: {}
+    default_bin: 100001.0
+    default_hex: '0x21'
+  PLL_settings_7:
+    address: '0x86'
+    attribute: NNNNNNNN
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2: {}
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7:
+        bit_attribute: N
+        field_name: pll_spare
+        lsb: '0'
+        msb: '7'
+        position: 7
+    default_bin: 0.0
+    default_hex: '0x00'
+  PSRR_Vbat_filter_reg:
+    address: '0xA7'
+    attribute: 00000NNN
+    bits:
+      bit0:
+        bit_attribute: '0'
+        field_name: vbat_filter_en
+        lsb: null
+        msb: null
+        position: 0
+      bit1:
+        bit_attribute: '0'
+        field_name: vbat_filter_mask_transient
+        lsb: null
+        msb: null
+        position: 1
+      bit2:
+        bit_attribute: '0'
+        field_name: vbat_filt_sel
+        lsb: null
+        msb: null
+        position: 2
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7: {}
+    default_bin: 11.0
+    default_hex: '0x03'
+  Page_selection:
+    address: '0xFE'
+    attribute: 0000000N
+    bits:
+      bit0:
+        bit_attribute: '0'
+        field_name: i2c_page_sel
+        lsb: null
+        msb: null
+        position: 0
+      bit1: {}
+      bit2: {}
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7: {}
+    default_bin: 0.0
+    default_hex: '0x00'
+  Protection_reg_1:
+    address: '0x9A'
+    attribute: 0NNN0NNN
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2:
+        bit_attribute: N
+        field_name: cld_spare_ch3
+        lsb: '0'
+        msb: '2'
+        position: 2
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6:
+        bit_attribute: N
+        field_name: cld_spare_ch4
+        lsb: '0'
+        msb: '2'
+        position: 6
+      bit7: {}
+    default_bin: 110001.0
+    default_hex: '0x31'
+  Protection_reg_2:
+    address: '0x9B'
+    attribute: 0NNN0NNN
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2:
+        bit_attribute: N
+        field_name: cld_spare_ch1
+        lsb: '0'
+        msb: '2'
+        position: 2
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6:
+        bit_attribute: N
+        field_name: cld_spare_ch2
+        lsb: '0'
+        msb: '2'
+        position: 6
+      bit7: {}
+    default_bin: 1110101.0
+    default_hex: '0x75'
+  Protection_reg_3:
+    address: '0x9C'
+    attribute: 00NNNNNN
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2:
+        bit_attribute: N
+        field_name: cld_ocp_thr_sel
+        lsb: '0'
+        msb: '2'
+        position: 2
+      bit3:
+        bit_attribute: N
+        field_name: cld_ocp_filter
+        lsb: null
+        msb: null
+        position: 3
+      bit4: {}
+      bit5:
+        bit_attribute: N
+        field_name: cld_pwm_mux_inv
+        lsb: null
+        msb: null
+        position: 5
+      bit6: {}
+      bit7: {}
+    default_bin: 1011011.0
+    default_hex: '0x5B'
+  Protection_reg_4:
+    address: '0x9D'
+    attribute: NNNNNNNN
+    bits:
+      bit0:
+        bit_attribute: N
+        field_name: cld_ocp_en_ch1
+        lsb: null
+        msb: null
+        position: 0
+      bit1:
+        bit_attribute: N
+        field_name: cld_ocp_en_ch2
+        lsb: null
+        msb: null
+        position: 1
+      bit2:
+        bit_attribute: N
+        field_name: cld_ocp_en_ch3
+        lsb: null
+        msb: null
+        position: 2
+      bit3:
+        bit_attribute: N
+        field_name: cld_ocp_en_ch4
+        lsb: null
+        msb: null
+        position: 3
+      bit4:
+        bit_attribute: N
+        field_name: cld_hfirc_clk_en_ch1
+        lsb: null
+        msb: null
+        position: 4
+      bit5:
+        bit_attribute: N
+        field_name: cld_hfirc_clk_en_ch2
+        lsb: null
+        msb: null
+        position: 5
+      bit6:
+        bit_attribute: N
+        field_name: cld_hfirc_clk_en_ch3
+        lsb: null
+        msb: null
+        position: 6
+      bit7:
+        bit_attribute: N
+        field_name: cld_hfirc_clk_en_ch4
+        lsb: null
+        msb: null
+        position: 7
+    default_bin: 110011.0
+    default_hex: '0x33'
+  SAR_settings_reg_1:
+    address: '0xD0'
+    attribute: 0NNNNNNN
+    bits:
+      bit0:
+        bit_attribute: '0'
+        field_name: sar_sample_rate
+        lsb: null
+        msb: null
+        position: 0
+      bit1:
+        bit_attribute: N
+        field_name: sar_skip_redundancy
+        lsb: null
+        msb: null
+        position: 1
+      bit2:
+        bit_attribute: N
+        field_name: sar_offs_cal_mode
+        lsb: null
+        msb: null
+        position: 2
+      bit3:
+        bit_attribute: N
+        field_name: (spare)
+        lsb: null
+        msb: null
+        position: 3
+      bit4:
+        bit_attribute: N
+        field_name: sar_loc_temp_gain_cal_en
+        lsb: null
+        msb: null
+        position: 4
+      bit5:
+        bit_attribute: N
+        field_name: sar_vbat_gain_cal_en
+        lsb: null
+        msb: null
+        position: 5
+      bit6:
+        bit_attribute: N
+        field_name: sar_temp_gain_cal_en
+        lsb: null
+        msb: null
+        position: 6
+      bit7: {}
+    default_bin: 10110101.0
+    default_hex: '0xB5'
+  SAR_settings_reg_10:
+    address: '0xD6'
+    attribute: 0NNN0NNN
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2:
+        bit_attribute: N
+        field_name: sar_temp_avg_sel
+        lsb: '0'
+        msb: '2'
+        position: 2
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6:
+        bit_attribute: N
+        field_name: sar_vbat_avg_sel
+        lsb: '0'
+        msb: '2'
+        position: 6
+      bit7: {}
+    default_bin: 110000.0
+    default_hex: '0x30'
+  SAR_settings_reg_11:
+    address: '0xD7'
+    attribute: 000NPPPP
+    bits:
+      bit0:
+        bit_attribute: '0'
+        field_name: sar_cal_meas_rst
+        lsb: null
+        msb: null
+        position: 0
+      bit1:
+        bit_attribute: '0'
+        field_name: sar_temp_meas_rst
+        lsb: null
+        msb: null
+        position: 1
+      bit2:
+        bit_attribute: '0'
+        field_name: sar_vbat_meas_rst
+        lsb: null
+        msb: null
+        position: 2
+      bit3:
+        bit_attribute: N
+        field_name: sar_loc_temp_meas_rst
+        lsb: null
+        msb: null
+        position: 3
+      bit4:
+        bit_attribute: P
+        field_name: sar_force_cal_buffer
+        lsb: null
+        msb: null
+        position: 4
+      bit5: {}
+      bit6: {}
+      bit7: {}
+    default_bin: 0.0
+    default_hex: '0x00'
+  SAR_settings_reg_2:
+    address: '0xD1'
+    attribute: 00NNNNNN
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2: {}
+      bit3: {}
+      bit4: {}
+      bit5:
+        bit_attribute: N
+        field_name: sar_vbat_filter
+        lsb: '0'
+        msb: '5'
+        position: 5
+      bit6: {}
+      bit7: {}
+    default_bin: 0.0
+    default_hex: '0x00'
+  SAR_settings_reg_3:
+    address: '0xD2'
+    attribute: 00NNNNNN
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2: {}
+      bit3: {}
+      bit4: {}
+      bit5:
+        bit_attribute: N
+        field_name: sar_loc_temp_filter
+        lsb: '0'
+        msb: '5'
+        position: 5
+      bit6: {}
+      bit7: {}
+    default_bin: 100000.0
+    default_hex: '0x20'
+  SAR_settings_reg_4:
+    address: '0xD3'
+    attribute: 00NNNNNN
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2: {}
+      bit3: {}
+      bit4: {}
+      bit5:
+        bit_attribute: N
+        field_name: sar_glob_temp_filter
+        lsb: '0'
+        msb: '5'
+        position: 5
+      bit6: {}
+      bit7: {}
+    default_bin: 100000.0
+    default_hex: '0x20'
+  SAR_settings_reg_5:
+    address: '0xD4'
+    attribute: NNNNNNNN
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2: {}
+      bit3:
+        bit_attribute: N
+        field_name: sar_temp_duty_cycle
+        lsb: '0'
+        msb: '3'
+        position: 3
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7:
+        bit_attribute: N
+        field_name: sar_cal_duty_cycle
+        lsb: '0'
+        msb: '3'
+        position: 7
+    default_bin: 101111.0
+    default_hex: '0x2F'
+  SAR_settings_reg_9:
+    address: '0xD5'
+    attribute: 00NN00NN
+    bits:
+      bit0: {}
+      bit1:
+        bit_attribute: '0'
+        field_name: sar_cal_avg_sel
+        lsb: '0'
+        msb: '1'
+        position: 1
+      bit2: {}
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7: {}
+    default_bin: 0.0
+    default_hex: '0x00'
+  SEQ_settings_1:
+    address: '0x70'
+    attribute: NNN0NNNN
+    bits:
+      bit0: {}
+      bit1:
+        bit_attribute: N
+        field_name: seq_step_time_pu
+        lsb: '0'
+        msb: '1'
+        position: 1
+      bit2: {}
+      bit3:
+        bit_attribute: '0'
+        field_name: seq_step_time_pd
+        lsb: '0'
+        msb: '1'
+        position: 3
+      bit4: {}
+      bit5:
+        bit_attribute: N
+        field_name: seq_ng_mode
+        lsb: null
+        msb: null
+        position: 5
+      bit6:
+        bit_attribute: N
+        field_name: seq_ng_gain
+        lsb: null
+        msb: null
+        position: 6
+      bit7:
+        bit_attribute: N
+        field_name: seq_auto_cal_en
+        lsb: null
+        msb: null
+        position: 7
+    default_bin: 111100.0
+    default_hex: '0x3C'
+  SEQ_settings_2:
+    address: '0x71'
+    attribute: NNNNNNNN
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2: {}
+      bit3:
+        bit_attribute: N
+        field_name: seq_gain_ramp_time_pu
+        lsb: '0'
+        msb: '3'
+        position: 3
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7:
+        bit_attribute: N
+        field_name: seq_gain_ramp_time_pd
+        lsb: '0'
+        msb: '3'
+        position: 7
+    default_bin: 0.0
+    default_hex: '0x00'
+  SEQ_settings_3:
+    address: '0x72'
+    attribute: NNNNNNNN
+    bits:
+      bit0: {}
+      bit1:
+        bit_attribute: N
+        field_name: seq_ps_ramp_time_pu
+        lsb: '0'
+        msb: '1'
+        position: 1
+      bit2: {}
+      bit3:
+        bit_attribute: N
+        field_name: seq_ps_ramp_time_pd
+        lsb: '0'
+        msb: '1'
+        position: 3
+      bit4:
+        bit_attribute: N
+        field_name: seq_ps_mode_pu
+        lsb: null
+        msb: null
+        position: 4
+      bit5:
+        bit_attribute: N
+        field_name: seq_ps_mode_pd
+        lsb: null
+        msb: null
+        position: 5
+      bit6:
+        bit_attribute: N
+        field_name: seq_gain_ramp_pu
+        lsb: null
+        msb: null
+        position: 6
+      bit7:
+        bit_attribute: N
+        field_name: seq_gain_ramp_pd
+        lsb: null
+        msb: null
+        position: 7
+    default_bin: 11000101.0
+    default_hex: '0xC5'
+  SEQ_settings_4:
+    address: '0x73'
+    attribute: 00NNNNNN
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2: {}
+      bit3: {}
+      bit4:
+        bit_attribute: N
+        field_name: seq_ng_ps_dis
+        lsb: null
+        msb: null
+        position: 4
+      bit5:
+        bit_attribute: N
+        field_name: seq_ng_intfb_dis
+        lsb: null
+        msb: null
+        position: 5
+      bit6: {}
+      bit7: {}
+    default_bin: 10110011.0
+    default_hex: '0xB3'
+  SEQ_settings_5:
+    address: '0x74'
+    attribute: 000NNNNN
+    bits:
+      bit0:
+        bit_attribute: '0'
+        field_name: seq_ng_tif_dis
+        lsb: null
+        msb: null
+        position: 0
+      bit1:
+        bit_attribute: '0'
+        field_name: seq_ng_vol_dis
+        lsb: null
+        msb: null
+        position: 1
+      bit2:
+        bit_attribute: '0'
+        field_name: seq_ng_ovs_dis
+        lsb: null
+        msb: null
+        position: 2
+      bit3:
+        bit_attribute: N
+        field_name: seq_ng_dws_dis
+        lsb: null
+        msb: null
+        position: 3
+      bit4:
+        bit_attribute: N
+        field_name: seq_ng_ptn_dis
+        lsb: null
+        msb: null
+        position: 4
+      bit5: {}
+      bit6: {}
+      bit7: {}
+    default_bin: 0.0
+    default_hex: '0x00'
+  SEQ_settings_6:
+    address: '0x7A'
+    attribute: 0000000N
+    bits:
+      bit0:
+        bit_attribute: '0'
+        field_name: seq_ng_cld_pd_dis
+        lsb: null
+        msb: null
+        position: 0
+      bit1: {}
+      bit2: {}
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7: {}
+    default_bin: 0.0
+    default_hex: '0x00'
+  SPARE_reg_1:
+    address: '0xBD'
+    attribute: 0000RRRR
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2: {}
+      bit3:
+        bit_attribute: '0'
+        field_name: spare_vsense
+        lsb: '0'
+        msb: '3'
+        position: 3
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7: {}
+    default_bin: 0.0
+    default_hex: '0x00'
+  SPARE_reg_2:
+    address: '0xBE'
+    attribute: RRRRRRRR
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2: {}
+      bit3:
+        bit_attribute: R
+        field_name: spare_isense_ch1
+        lsb: '0'
+        msb: '3'
+        position: 3
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7:
+        bit_attribute: R
+        field_name: spare_isense_ch2
+        lsb: '0'
+        msb: '3'
+        position: 7
+    default_bin: 0.0
+    default_hex: '0x00'
+  SPARE_reg_3:
+    address: '0xCF'
+    attribute: RRRRRRRR
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2: {}
+      bit3:
+        bit_attribute: R
+        field_name: spare_diag_fsm_ch4
+        lsb: '0'
+        msb: '3'
+        position: 3
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7:
+        bit_attribute: R
+        field_name: spare_diag_fsm_ch3
+        lsb: '0'
+        msb: '3'
+        position: 7
+    default_bin: 0.0
+    default_hex: '0x00'
+  Seq_state_Reg:
+    address: '0xE8'
+    attribute: NNRRRRRR
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2: {}
+      bit3: {}
+      bit4: {}
+      bit5:
+        bit_attribute: R
+        field_name: seq_state
+        lsb: '0'
+        msb: '5'
+        position: 5
+      bit6: {}
+      bit7:
+        bit_attribute: R
+        field_name: read_channel
+        lsb: '0'
+        msb: '1'
+        position: 7
+    default_bin: 0.0
+    default_hex: '0x00'
+  Software_reset:
+    address: '0xF8'
+    attribute: 0000000P
+    bits:
+      bit0:
+        bit_attribute: '0'
+        field_name: hard_reset
+        lsb: null
+        msb: null
+        position: 0
+      bit1: {}
+      bit2: {}
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7: {}
+    default_bin: 0.0
+    default_hex: '0x00'
+  Status_REG1:
+    address: '0x30'
+    attribute: RRRRRRRR
+    bits:
+      bit0:
+        bit_attribute: R
+        field_name: play_open_load_flag_ch4
+        lsb: null
+        msb: null
+        position: 0
+      bit1: {}
+      bit2:
+        bit_attribute: R
+        field_name: play_open_load_end_ch4
+        lsb: null
+        msb: null
+        position: 2
+      bit3: {}
+      bit4: {}
+      bit5:
+        bit_attribute: R
+        field_name: out_od_flag_ch4
+        lsb: null
+        msb: null
+        position: 5
+      bit6: {}
+      bit7: {}
+    default_bin: 0.0
+    default_hex: '0x00'
+  TDM_apply_configuration:
+    address: '0x6D'
+    attribute: P000000P
+    bits:
+      bit0:
+        bit_attribute: P
+        field_name: tdm_apply_conf
+        lsb: null
+        msb: null
+        position: 0
+      bit1: {}
+      bit2: {}
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7:
+        bit_attribute: P
+        field_name: tdm_resync
+        lsb: null
+        msb: null
+        position: 7
+    default_bin: 0.0
+    default_hex: '0x00'
+  TDM_settings_1:
+    address: '0x69'
+    attribute: 0000NNNN
+    bits:
+      bit0:
+        bit_attribute: '0'
+        field_name: tdm_sync_mode
+        lsb: null
+        msb: null
+        position: 0
+      bit1:
+        bit_attribute: '0'
+        field_name: tdm_bclk_polarity
+        lsb: null
+        msb: null
+        position: 1
+      bit2:
+        bit_attribute: '0'
+        field_name: tdm_fsyn_polarity
+        lsb: null
+        msb: null
+        position: 2
+      bit3:
+        bit_attribute: '0'
+        field_name: tdm_delay_mode
+        lsb: null
+        msb: null
+        position: 3
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7: {}
+    default_bin: 1001.0
+    default_hex: '0x09'
+  TDM_settings_5:
+    address: '0x6B'
+    attribute: NNNNNNNN
+    bits:
+      bit0: {}
+      bit1:
+        bit_attribute: N
+        field_name: tdm_i_slot_size
+        lsb: '0'
+        msb: '1'
+        position: 1
+      bit2: {}
+      bit3:
+        bit_attribute: N
+        field_name: tdm_o_slot_size
+        lsb: '0'
+        msb: '1'
+        position: 3
+      bit4:
+        bit_attribute: N
+        field_name: tdm_i_dl
+        lsb: null
+        msb: null
+        position: 4
+      bit5:
+        bit_attribute: N
+        field_name: tdm_o_dl
+        lsb: null
+        msb: null
+        position: 5
+      bit6:
+        bit_attribute: N
+        field_name: (spare)
+        lsb: null
+        msb: null
+        position: 6
+      bit7:
+        bit_attribute: N
+        field_name: (spare)
+        lsb: null
+        msb: null
+        position: 7
+    default_bin: 111111.0
+    default_hex: '0x3F'
+  TDM_settings_6:
+    address: '0x6C'
+    attribute: 00NNNNNN
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2: {}
+      bit3: {}
+      bit4: {}
+      bit5:
+        bit_attribute: N
+        field_name: tdm_o_mode
+        lsb: '0'
+        msb: '5'
+        position: 5
+      bit6: {}
+      bit7: {}
+    default_bin: 10.0
+    default_hex: '0x00'
+  TEMP_measurement_reg_1:
+    address: '0xEF'
+    attribute: 000000RR
+    bits:
+      bit0: {}
+      bit1:
+        bit_attribute: '0'
+        field_name: loc_temp_meas
+        lsb: '8'
+        msb: '9'
+        position: 1
+      bit2: {}
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7: {}
+    default_bin: 0.0
+    default_hex: '0x00'
+  TEMP_measurement_reg_2:
+    address: '0xF0'
+    attribute: RRRRRRRR
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2: {}
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7:
+        bit_attribute: R
+        field_name: loc_temp_meas
+        lsb: '0'
+        msb: '7'
+        position: 7
+    default_bin: 0.0
+    default_hex: '0x00'
+  Unlock_register:
+    address: '0xF7'
+    attribute: 0000000R
+    bits:
+      bit0:
+        bit_attribute: '0'
+        field_name: unlock_tst_addr
+        lsb: null
+        msb: null
+        position: 0
+      bit1: {}
+      bit2: {}
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7: {}
+    default_bin: 0.0
+    default_hex: '0x00'
+  V/I_SENSE_CH1_settings_1:
+    address: '0xB1'
+    attribute: 00NNN0NN
+    bits:
+      bit0:
+        bit_attribute: '0'
+        field_name: vis_dig_en_v_ch4
+        lsb: null
+        msb: null
+        position: 0
+      bit1:
+        bit_attribute: '0'
+        field_name: vis_dig_en_i_ch4
+        lsb: null
+        msb: null
+        position: 1
+      bit2: {}
+      bit3:
+        bit_attribute: N
+        field_name: vis_adc_clk_pol_i_ch4
+        lsb: null
+        msb: null
+        position: 3
+      bit4: {}
+      bit5:
+        bit_attribute: '0'
+        field_name: vis_pga_vol_v_ch4
+        lsb: '0'
+        msb: '1'
+        position: 5
+      bit6: {}
+      bit7: {}
+    default_bin: 11.0
+    default_hex: '0x03'
+  V/I_SENSE_settings_10:
+    address: '0xB5'
+    attribute: NNNNNNNN
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2:
+        bit_attribute: N
+        field_name: vis_comp_curr_trimm
+        lsb: '0'
+        msb: '2'
+        position: 2
+      bit3:
+        bit_attribute: N
+        field_name: (spare)
+        lsb: null
+        msb: null
+        position: 3
+      bit4: {}
+      bit5: {}
+      bit6:
+        bit_attribute: N
+        field_name: vis_ref_curr_trimm
+        lsb: '0'
+        msb: '2'
+        position: 6
+      bit7:
+        bit_attribute: N
+        field_name: vis_allbias_bst
+        lsb: null
+        msb: null
+        position: 7
+    default_bin: 111011.0
+    default_hex: '0x3B'
+  V/I_SENSE_settings_3:
+    address: '0xB6'
+    attribute: 00NNNNNN
+    bits:
+      bit0: {}
+      bit1:
+        bit_attribute: '0'
+        field_name: vis_sample_rate
+        lsb: '0'
+        msb: '1'
+        position: 1
+      bit2:
+        bit_attribute: N
+        field_name: (spare)
+        lsb: null
+        msb: null
+        position: 2
+      bit3:
+        bit_attribute: N
+        field_name: vis_force_sample_rate
+        lsb: null
+        msb: null
+        position: 3
+      bit4:
+        bit_attribute: N
+        field_name: vis_bit_stream_pol_v
+        lsb: null
+        msb: null
+        position: 4
+      bit5:
+        bit_attribute: N
+        field_name: vis_bit_stream_pol_i
+        lsb: null
+        msb: null
+        position: 5
+      bit6: {}
+      bit7: {}
+    default_bin: 0.0
+    default_hex: '0x00'
+  V/I_SENSE_settings_7:
+    address: '0xB2'
+    attribute: 00000NNN
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2:
+        bit_attribute: '0'
+        field_name: vis_pga_vol_i_ch4
+        lsb: '0'
+        msb: '2'
+        position: 2
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7: {}
+    default_bin: 0.0
+    default_hex: '0x00'
+  V/I_SENSE_settings_8:
+    address: '0xB3'
+    attribute: 00NNNNNN
+    bits:
+      bit0:
+        bit_attribute: '0'
+        field_name: vis_adc_rstb_ch4
+        lsb: null
+        msb: null
+        position: 0
+      bit1:
+        bit_attribute: '0'
+        field_name: vis_adc_ref_en_ch4
+        lsb: null
+        msb: null
+        position: 1
+      bit2:
+        bit_attribute: N
+        field_name: vis_adcv_en_ch4
+        lsb: null
+        msb: null
+        position: 2
+      bit3:
+        bit_attribute: N
+        field_name: vis_adci_en_ch4
+        lsb: null
+        msb: null
+        position: 3
+      bit4:
+        bit_attribute: N
+        field_name: vis_pgav_en_ch4
+        lsb: null
+        msb: null
+        position: 4
+      bit5:
+        bit_attribute: N
+        field_name: vis_pgai_en_ch4
+        lsb: null
+        msb: null
+        position: 5
+      bit6: {}
+      bit7: {}
+    default_bin: 111111.0
+    default_hex: '0x3F'
+  V/I_SENSE_settings_9:
+    address: '0xB4'
+    attribute: NNNNNNNN
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2:
+        bit_attribute: N
+        field_name: vis_adc_curr_trimm
+        lsb: '0'
+        msb: '2'
+        position: 2
+      bit3:
+        bit_attribute: N
+        field_name: vis_int2_curr_bst
+        lsb: null
+        msb: null
+        position: 3
+      bit4: {}
+      bit5: {}
+      bit6:
+        bit_attribute: N
+        field_name: vis_pga_curr_trimm
+        lsb: '0'
+        msb: '2'
+        position: 6
+      bit7:
+        bit_attribute: N
+        field_name: vis_int1_curr_bst
+        lsb: null
+        msb: null
+        position: 7
+    default_bin: 110011.0
+    default_hex: '0x33'
+  V/I_SENSE_spare_1:
+    address: '0xB7'
+    attribute: NNNNNNNN
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2: {}
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7:
+        bit_attribute: N
+        field_name: vis_spare10_ch1
+        lsb: '0'
+        msb: '7'
+        position: 7
+    default_bin: 0.0
+    default_hex: '0x00'
+  V/I_SENSE_spare_2:
+    address: '0xB8'
+    attribute: NNNNNNNN
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2: {}
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7:
+        bit_attribute: N
+        field_name: vis_spare10_ch2
+        lsb: '0'
+        msb: '7'
+        position: 7
+    default_bin: 0.0
+    default_hex: '0x00'
+  V/I_SENSE_spare_3:
+    address: '0xB9'
+    attribute: NNNNNNNN
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2: {}
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7:
+        bit_attribute: N
+        field_name: vis_spare10_ch3
+        lsb: '0'
+        msb: '7'
+        position: 7
+    default_bin: 0.0
+    default_hex: '0x00'
+  V/I_SENSE_spare_4:
+    address: '0xBA'
+    attribute: NNNNNNNN
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2: {}
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7:
+        bit_attribute: N
+        field_name: vis_spare10_ch4
+        lsb: '0'
+        msb: '7'
+        position: 7
+    default_bin: 0.0
+    default_hex: '0x00'
+  VBAT_measurement_reg_1:
+    address: '0x31'
+    attribute: 000000RR
+    bits:
+      bit0: {}
+      bit1:
+        bit_attribute: '0'
+        field_name: vbat_meas
+        lsb: '8'
+        msb: '9'
+        position: 1
+      bit2: {}
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7: {}
+    default_bin: 0.0
+    default_hex: '0x00'
+  VBAT_measurement_reg_2:
+    address: '0x32'
+    attribute: RRRRRRRR
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2: {}
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7:
+        bit_attribute: R
+        field_name: vbat_meas
+        lsb: '0'
+        msb: '7'
+        position: 7
+    default_bin: 0.0
+    default_hex: '0x00'
+  VOL_settings_1:
+    address: '0x60'
+    attribute: 0NNNNNNN
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2: {}
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6:
+        bit_attribute: N
+        field_name: vol_ramp_time_step
+        lsb: '0'
+        msb: '6'
+        position: 6
+      bit7: {}
+    default_bin: 10000.0
+    default_hex: '0x10'
+  VOL_settings_2:
+    address: '0x61'
+    attribute: NNNNNNNN
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2: {}
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7:
+        bit_attribute: N
+        field_name: vol_sel
+        lsb: '2'
+        msb: '9'
+        position: 7
+    default_bin: 11000000.0
+    default_hex: '0xC0'
+  VOL_settings_3:
+    address: '0x62'
+    attribute: NNNNNNNN
+    bits:
+      bit0: {}
+      bit1:
+        bit_attribute: N
+        field_name: vol_sel
+        lsb: '0'
+        msb: '1'
+        position: 1
+      bit2:
+        bit_attribute: N
+        field_name: vol_auto_ramp_dis
+        lsb: null
+        msb: null
+        position: 2
+      bit3:
+        bit_attribute: N
+        field_name: (spare)
+        lsb: null
+        msb: null
+        position: 3
+      bit4:
+        bit_attribute: N
+        field_name: (spare)
+        lsb: null
+        msb: null
+        position: 4
+      bit5:
+        bit_attribute: N
+        field_name: (spare)
+        lsb: null
+        msb: null
+        position: 5
+      bit6:
+        bit_attribute: N
+        field_name: (spare)
+        lsb: null
+        msb: null
+        position: 6
+      bit7:
+        bit_attribute: N
+        field_name: (spare)
+        lsb: null
+        msb: null
+        position: 7
+    default_bin: 0.0
+    default_hex: '0x00'
+  VSENSE_channel_reg_2:
+    address: '0x3A'
+    attribute: 00000NNN
+    bits:
+      bit0: {}
+      bit1:
+        bit_attribute: '0'
+        field_name: vis_mux_v
+        lsb: '0'
+        msb: '1'
+        position: 1
+      bit2:
+        bit_attribute: '0'
+        field_name: set_vsense_channel
+        lsb: null
+        msb: null
+        position: 2
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7: {}
+    default_bin: 0.0
+    default_hex: '0x00'
+  Volume_status_Reg_0:
+    address: '0xED'
+    attribute: 000000RR
+    bits:
+      bit0: {}
+      bit1:
+        bit_attribute: '0'
+        field_name: dsp_vol_sel
+        lsb: '8'
+        msb: '9'
+        position: 1
+      bit2: {}
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7: {}
+    default_bin: 0.0
+    default_hex: '0x00'
+  Volume_status_Reg_1:
+    address: '0xEE'
+    attribute: RRRRRRRR
+    bits:
+      bit0: {}
+      bit1: {}
+      bit2: {}
+      bit3: {}
+      bit4: {}
+      bit5: {}
+      bit6: {}
+      bit7:
+        bit_attribute: R
+        field_name: dsp_vol_sel
+        lsb: '0'
+        msb: '7'
+        position: 7
+    default_bin: 0.0
+    default_hex: '0x00'
