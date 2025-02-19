@@ -29,24 +29,24 @@ def ivm6201_pin_check(pin='', pins=list(ivm6201_config.pins.values()) ):
     # return pin in pins
 
 def get_device(deviceNo=0):
-    try:
-        device = Device(devnum=deviceNo)
+    if device := Device(devnum=deviceNo):
         return device
-    except Exception as e :
-        log.error(e)
+    else:
+        print(f'!!!!!!!!!!!!!!!!!!!! fail :> MCP not presetn ')
         return None
 
 def get_slave(device: Device,address=ivm6201_config.Address):
-        try:
-            slave = device.I2C_Slave(address)
+    try:
+        if device.I2C_read(address):
             sleep(0.01)
-            if slave:
-                return slave
-            else:
-                return None
-            
-        except EasyMCP2221.exceptions.NotAckError:
-            print
+            return device.I2C_Slave(address)
+        else:
+            print(f'!!!!!!!!!!!!!!! fail:> slave not present with address {address}')
+            return None
+    except EasyMCP2221.exceptions.NotAckError:
+        print(f'!!!!!!!!!!!!!!! fail:> slave not present with address {address}')
+        return None
+
 def I2C_read_register(slave,register_addr:0x00):
     try:
         if slave:
@@ -55,6 +55,7 @@ def I2C_read_register(slave,register_addr:0x00):
             return None
     except Exception as e:
         print(e)
+
         
 def I2C_read_register_bits(slave,register_addr:0x00,msb:int,lsb: int):
     try:

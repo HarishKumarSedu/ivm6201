@@ -122,7 +122,17 @@ class DFT_Actions:
                 return value  # Return the float value
             except ValueError:
                 print("Invalid input. Please enter a number.")
+    def dft_force_sweep(self,force_sweep:dict):
+        {'primary_signal': 'AVDD', 'secondary_signal': 'GND', 'initial_value': {'raw_value': 14.0, 'multiplier': 1, 'unit': 'V', 'final_value': 14.0, 'multiplier_prefix': ''}, 'final_value': {'raw_value': 5.0, 'multiplier': 1, 'unit': 'V', 'final_value': 5.0, 'multiplier_prefix': ''}, 'step_size': {'raw_value': 1.0, 'multiplier': 1, 'unit': 'V', 'final_value': 1.0, 'multiplier_prefix': ''}, 'sweep_time': None}
+        primary_signal = force_sweep.get('primary_signal','')
+        secondary_signal = force_sweep.get('secondary_signal','')
+        initial_value = initial_value.get('final_value',0) if (initial_value := force_sweep.get('initial_value',None)) else 0
+        unit = unit.get('unit',0) if (unit := force_sweep.get('initial_value',None)) else 0
+        final_value = final_value.get('final_value',0) if (final_value := force_sweep.get('final_value',None)) else 0
+        step_size = step_size.get('final_value',0) if (step_size := force_sweep.get('step_size',None)) else 0
+        sweep_time = sweep_time.get('final_value',0) if (sweep_time := force_sweep.get('sweep_time',None)) else 0
 
+        input(f' Force Sweep {unit}, { primary_signal} w.r.t {secondary_signal} : initial value {initial_value} final value : {final_value} step size : {step_size} sweeptime: {sweep_time}S :>')
 
 class TestAnalyzer:
     """
@@ -504,6 +514,8 @@ class TestAnalyzer:
             if (primay_signal := force_sweep.get('primary_signal')) and (ivm6201_pin_check(primay_signal)):
                 if (secondary_signal := force_sweep.get('secondary_signal')):
                     if ivm6201_pin_check(secondary_signal):
+                        # print(force_sweep)
+                        self.actions.dft_force_sweep(force_sweep)
                         pass
                     else:
                         print(
