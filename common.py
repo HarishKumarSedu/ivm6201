@@ -62,14 +62,14 @@ def I2C_read_register_bits(slave,register_addr:0x00,msb:int,lsb: int):
             bit_width = 2**(msb - lsb+1)
             mask = ((bit_width-1) << lsb)
             device_data = int.from_bytes(slave.read_register(register_addr),'little')
-            device_bitmodified_data = int(device_data,16) >> lsb
+            device_bitmodified_data = int(device_data) >> lsb
             return device_bitmodified_data
         else :
             return None
     except Exception as e:
         print(e)
         
-def I2C_write_register(slave,register:dict,value:int|float):
+def I2C_write_register(slave,register:dict,value:Union[int,float],*args,**kwargs):
     if slave:
         register_addr = register.get('address')
         msb = register.get('msb')
@@ -77,8 +77,28 @@ def I2C_write_register(slave,register:dict,value:int|float):
         device_data = I2C_read_register(slave=slave,register_addr=register_addr) # write the existing data
         bit_width = 2**(msb - lsb+1)
         mask = ~((bit_width-1) << lsb)
-        device_data = (device_data & mask) | ((int(value,16)) << lsb) # modify the data
+        device_data = (device_data & mask) | ((int(value)) << lsb) # modify the data
         slave.write([register_addr,device_data])
         return I2C_read_register(slave=slave,register_addr=register_addr)
     else:
         return None
+def device_test():
+        # Connect to MCP2221
+    mcp = EasyMCP2221.Device()
+
+    print("Searching...")
+
+    for addr in range(0, 0x80):
+        try:
+            mcp.I2C_read(addr)
+            print("I2C slave found at address 0x%02X" % (addr))
+
+        except EasyMCP2221.exceptions.NotAckError:
+            pass
+
+if __name__=='__main__':
+    device = get_device()
+    slave = get_slave(device=device,address=ivm6201.Address)
+    I2C_write_register(slave=slave, register={'address':0xFE, 'msb':7, 'lsb':0}, value=1)
+    print(I2C_read_register(slave=slave, register_addr=0xFE))
+    print(I2C_read_register_bits(slave=slave,register_addr=0xFE, msb=7,lsb=0))
