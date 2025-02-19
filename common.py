@@ -60,7 +60,7 @@ def I2C_read_register(slave,register_addr:0x00):
         print(e)
 
         
-def I2C_read_register_bits(slave,register_addr:0x00,msb:int,lsb: int):
+def I2C_read_register_bits(slave,register_addr:Union[int,hex],msb:int,lsb: int):
     try:
         if slave:
             # check if the lsb and msb mentioned in absolute bit postion 
@@ -82,16 +82,18 @@ def I2C_write_register(slave,register:dict,value:Union[int,float],*args,**kwargs
         register_addr = register.get('address')
         msb = register.get('msb')
         lsb = register.get('lsb')
+        print(register,value)
         # check if the lsb and msb mentioned in absolute bit postion 
         msb = msb-8 if msb >=8 else msb
         lsb = msb-8 if lsb >=8 else lsb
         device_data = I2C_read_register(slave=slave,register_addr=register_addr) # write the existing data
+        # print(f'data read {register_addr}',device_data)
         bit_width = 2**(msb - lsb+1)
         mask = ~((bit_width-1) << lsb)
         device_data = (device_data & mask) | ((int(value)) << lsb) # modify the data
         slave.write([register_addr,device_data])
         device_data = I2C_read_register(slave=slave,register_addr=register_addr) # read dat back to confirm writing
-        # print(f'data read {hex(register_addr)}',hex(device_data))
+        # print(f'data read {register_addr} ({hex(register_addr)})',hex(device_data))
         return device_data
     
     else:
@@ -162,12 +164,12 @@ if __name__=='__main__':
     slave = get_slave(device=device,address=ivm6201_config.Address)
     # select page 0 
     I2C_write_register(slave=slave, register={'address':0xFE, 'msb':0, 'lsb':0}, value=int(0x0))
-    I2C_write_register(slave=slave, register={'address':0x0, 'msb':1, 'lsb':0}, value=int(0xf))
+    I2C_write_register(slave=slave, register={'address':0x18, 'msb':2, 'lsb':0}, value=int(0x7))
     # print('Device id and version id ', hex(I2C_read_register(slave=slave, register_addr=0xFF)))
     # print('device id',hex(I2C_read_register_bits(slave=slave,register_addr=0xFF, msb=7,lsb=3)))
-    # print('8bit data ', hex(I2C_read_register(slave=slave, register_addr=0x0)))
+    print('8bit data ', hex(I2C_read_register(slave=slave, register_addr=0x18)))
     # print('bit data',hex(I2C_read_register_bits(slave=slave,register_addr=0x0, msb=1,lsb=0)))
-    final_value = I2C_write_multiple_registers(slave=slave, registers=[{'address':0x20, 'msb':0, 'lsb':0},{'address':0xFC, 'msb':1, 'lsb':0}],value=int(0x6))
-    print(hex(final_value))
+    # final_value = I2C_write_multiple_registers(slave=slave, registers=[{'address':0x20, 'msb':0, 'lsb':0},{'address':0xFC, 'msb':1, 'lsb':0}],value=int(0x6))
+    # print(hex(final_value))
     # print(hex(I2C_read_register_bits(slave=slave, register_addr=0xFC,msb=1,lsb=0)))
     # print(hex(I2C_read_multiple_registers(slave=slave, registers=[{'address':0x20, 'msb':0, 'lsb':0},{'address':0xFC, 'msb':1, 'lsb':0},])))

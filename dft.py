@@ -21,7 +21,7 @@ def parse_register_notation(notation):
             
             match = re.match(pattern, part)
             if match:
-                address = match.group(1)
+                address = int(int(match.group(1),16))
                 msb = int(match.group(2)) if match.group(2) else 7
                 lsb = int(match.group(3)) if match.group(3) else 0
                 
@@ -303,13 +303,13 @@ def parse_read_instruction(text):
                 address, bit_range = reg.split('[')
                 msb, lsb = bit_range.strip(']').split(':')
                 registers.append({
-                    'address': address,
+                    'address': int(address,16),
                     'msb': int(msb),
                     'lsb': int(lsb)
                 })
             else:
                 registers.append({
-                    'address': reg,
+                    'address': int(reg,16),
                     'msb': 7,  # Default for 8-bit register
                     'lsb': 0   # Default for 8-bit register
                 })
@@ -320,15 +320,16 @@ def parse_read_instruction(text):
         }
     
     return None
-def parse_copy_instruction(text):
+def parse_copy_instruction(input_string):
+    input_string = re.sub(r'"[^"]*"', '', input_string).strip()
     # Regex pattern to match Copy instruction with optional bit ranges
     pattern = r'Copy__(?:0x[0-9A-Fa-f]+(?:\[(\d+):(\d+)\])?__0x[0-9A-Fa-f]+(?:\[(\d+):(\d+)\])?)'
     
-    match = re.match(pattern, text)
+    match = re.match(pattern, input_string)
     
     if match:
         # Extract registers and their bit ranges
-        registers_raw = text.split('__')[1:]
+        registers_raw = input_string.split('__')[1:]
         
         registers = []
         for reg in registers_raw:
@@ -364,7 +365,7 @@ def parse_copy_instruction(text):
     return {}
 import re
 
-def parse_save_instruction(text):
+def parse_save_instruction(input_string):
     # Regex pattern to match Save instruction with optional bit ranges
     # Breakdown:
     # - 'Save__' literal start of instruction
@@ -373,13 +374,14 @@ def parse_save_instruction(text):
     #   - Optional bit range in square brackets
     #   - Optional separator between registers
     # - '([A-Za-z0-9_]+)' captures the final save variable
+    input_string = re.sub(r'"[^"]*"', '', input_string).strip()
     pattern = r'Save__(?:0x[0-9A-Fa-f]+(?:\[(\d+):(\d+)\])?__?)+([A-Za-z0-9_]+)'
     
-    match = re.match(pattern, text)
+    match = re.match(pattern, input_string)
     
     if match:
         # Split registers, excluding the save variable
-        registers_raw = text.split('__')[1:-1]
+        registers_raw = input_string.split('__')[1:-1]
         
         # Process each register
         registers = []
@@ -407,7 +409,7 @@ def parse_save_instruction(text):
         }
     
     return {}
-def parse_restore_instruction(text):
+def parse_restore_instruction(input_string):
     # Regex pattern to match Restore instruction with optional bit ranges
     # Breakdown:
     # - 'Restore__' literal start of instruction
@@ -416,13 +418,14 @@ def parse_restore_instruction(text):
     #   - Optional bit range in square brackets
     #   - Optional separator between registers
     # - '([A-Za-z0-9_]+)' captures the final restore variable
+    input_string = re.sub(r'"[^"]*"', '', input_string).strip()
     pattern = r'Restore__(?:0x[0-9A-Fa-f]+(?:\[(\d+):(\d+)\])?__?)+([A-Za-z0-9_]+)'
     
-    match = re.match(pattern, text)
+    match = re.match(pattern, input_string)
     
     if match:
         # Split registers, excluding the restore variable
-        registers_raw = text.split('__')[1:-1]
+        registers_raw = input_string.split('__')[1:-1]
         
         # Process each register
         registers = []
@@ -432,14 +435,14 @@ def parse_restore_instruction(text):
                 address, bit_range = reg.split('[')
                 msb, lsb = map(int, bit_range.strip(']').split(':'))
                 registers.append({
-                    'address': address,
+                    'address': int(address,16),
                     'msb': max(msb, lsb),  # Ensure msb is always larger
                     'lsb': min(msb, lsb)
                 })
             else:
                 # Default 8-bit register configuration
                 registers.append({
-                    'address': reg,
+                    'address': int(reg,16),
                     'msb': 7,
                     'lsb': 0
                 })
@@ -669,14 +672,14 @@ def parse_trim_instruction(input_string):
                 address, bit_range = reg.split('[')
                 msb, lsb = map(int, bit_range.strip(']').split(':')) if ':' in bit_range else (bit_range.strip(']'),bit_range.strip(']')) 
                 registers.append({
-                    'address': address,
+                    'address': int(address,16),
                     'msb': max(msb, lsb),  # Ensure msb is always larger
                     'lsb': min(msb, lsb)
                 })
             else:
                 # Default 8-bit register configuration
                 registers.append({
-                    'address': reg,
+                    'address': int(reg,16),
                     'msb': 7,
                     'lsb': 0
                 })

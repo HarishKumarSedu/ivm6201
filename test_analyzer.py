@@ -260,12 +260,16 @@ class TestAnalyzer:
         # check both savemeas and trim_reg not null
         msb=0
         lsb=0
+        bitwdit=0
         meas_sweep_data = []
         code = []
         if savemeas and trim_reg:
             if self.dut:
-                # msb = [msb+register.get('msb') for register in registers][-1]
-                # lsb = [lsb+register.get('lsb') for register in registers][-1]
+                for register in registers:
+                    if register:
+                        msb = [msb+register.get('msb') for register in registers][-1]
+                        lsb = [lsb+register.get('lsb') for register in registers][-1]
+                        bitwdit= bitwdit+(msb-lsb+1)
                 # sweep loop 
                 # uncomment when you  take iterative measurment
                 # for code_iter in range(2**(msb-lsb)):
@@ -287,8 +291,11 @@ class TestAnalyzer:
                         #     print(f'!!!!!!!!!!! multiple registers passed !!!!!!!!!')
                         value = int(input(f'''Enter Trim register value of {trim_reg}\n\
                             Move the Value (must be in int) and notice {savemeas} change\n\
-                            press Ctrl+C to exit loop:>'''))
-                        I2C_write_multiple_registers(self.dut,registers,value)
+                            press Ctrl+C+Enter to exit loop:>'''))
+                        if value < 2**(bitwdit):
+                            I2C_write_multiple_registers(self.dut,registers,value)
+                        else:
+                            print(f'!!!!!!! fail Enterd value invali wiht bit size of the register !!!!!!!!')
                         pass
                     except KeyboardInterrupt:
                         pass
@@ -535,11 +542,11 @@ class TestAnalyzer:
         elif (savemeas := parse_savemeas(instruction)):
             # check it is Trim sweep 
             self.savemeas_data = savemeas
-            measured_value = self._process_savemeas(savemeas)
-            if measured_value:
-                if len(self.Vars) == 1 and not re.search('trim', self.test_name.lower()) and not re.search('Calculate__MinError',self.raw_data.loc['Instructions', self.test_name]):
-                    self.test_limits(measured_value)
-            print(f"Updated Vars: {self.Vars}")
+            # if measured_value:
+            if len(self.Vars) <= 1 and not re.search('trim', self.test_name.lower()) and not re.search('Calculate__MinError',self.raw_data.loc['Instructions', self.test_name]):
+                measured_value = self._process_savemeas(savemeas)
+                self.test_limits(measured_value)
+                print(f"Updated Vars: {self.Vars}")
         elif (measrement := parse_measurements(instruction)):
             if (primay_signal := measrement.get('primary_signal')) and (ivm6201_pin_check(primay_signal)):
                 if (secondary_signal := measrement.get('secondary_signal')):
