@@ -25,7 +25,10 @@ def read_yaml(path_to_yaml) -> ConfigBox:
     
 ivm6201_config = read_yaml('ivm6201.yaml').ivm6201
 def ivm6201_pin_check(pin='', pins=list(ivm6201_config.pins.values()) ):
-    return pin.lower() in ''.join(pins).lower()
+    if pin:
+        return pin.lower() in ''.join(pins).lower()
+    else:
+        return None
     # return pin in pins
 
 def get_device(deviceNo=0):

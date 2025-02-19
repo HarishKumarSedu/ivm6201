@@ -526,7 +526,7 @@ class TestAnalyzer:
         elif (force := parse_force_instruction(instruction)):
             # check the forcing pin of the IVM6201 
             primary_signal = force.get('primary_signal')
-            secondary_signal = primary_signal if (primary_signal := force.get('secondary_signal')) else 'GND'
+            secondary_signal = secondary_signal if (secondary_signal := force.get('secondary_signal')) else 'GND'
             
             if ivm6201_pin_check(primary_signal) and ivm6201_pin_check(secondary_signal):
                 self.actions.dft_force_action(force)
@@ -535,13 +535,11 @@ class TestAnalyzer:
         elif (savemeas := parse_savemeas(instruction)):
             # check it is Trim sweep 
             self.savemeas_data = savemeas
-            if len(self.Vars) == 1 and not re.search('trim', self.test_name.lower()) and not re.search('Calculate__',self.raw_data.loc['Instructions', self.test_name]):
-                measured_value = self._process_savemeas(savemeas)
-                self.test_limits(measured_value)
-                print(f"Updated Vars: {self.Vars}")
-            elif  re.search('trim', self.test_name.lower()) and not re.search('Calculate__MinError',self.raw_data.loc['Instructions', self.test_name]):
-                measured_value = self._process_savemeas(savemeas)
-                print(f"Updated Vars: {self.Vars}")
+            measured_value = self._process_savemeas(savemeas)
+            if measured_value:
+                if len(self.Vars) == 1 and not re.search('trim', self.test_name.lower()) and not re.search('Calculate__MinError',self.raw_data.loc['Instructions', self.test_name]):
+                    self.test_limits(measured_value)
+            print(f"Updated Vars: {self.Vars}")
         elif (measrement := parse_measurements(instruction)):
             if (primay_signal := measrement.get('primary_signal')) and (ivm6201_pin_check(primay_signal)):
                 if (secondary_signal := measrement.get('secondary_signal')):
