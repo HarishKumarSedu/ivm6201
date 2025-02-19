@@ -3,6 +3,7 @@ import argparse
 import re
 import warnings
 import time
+import random
 from dft import (
     parse_procedure_name,
     parse_wait_delay,
@@ -18,9 +19,14 @@ from dft import (
     parse_calculate_expression,
     parse_sweep_trig_store,
     parse_multiplier_value,
-    solve_formula  # Import solve_formula
+    solve_formula,  # Import solve_formula
+    parse_read_instruction,
+    parse_restore_instruction
 )
-from common import ivm6201_pin_check
+from common import (
+    ivm6201_pin_check, get_device, get_slave, I2C_read_register,I2C_write_register, ivm6201_config, I2C_read_multiple_registers,
+    I2C_write_multiple_registers
+)
 
 warnings.filterwarnings('ignore')
 
@@ -40,6 +46,7 @@ class DFT_Actions:
         """
         primary_signal = force_dict.get('primary_signal')
         secondary_signal = force_dict.get('secondary_signal', 'GND')  # Default to 'GND' if not provided
+        secondary_signal = secondary_signal if secondary_signal else 'GND'
         absValue = force_dict.get('absValue')
         unit = force_dict.get('unit')
         input(f'Force {primary_signal} with respect to {secondary_signal} --> {absValue}{unit} :>')
@@ -131,10 +138,17 @@ class TestAnalyzer:
             sheet_name (str): Name of the sheet to read.
             test_name (str): Name of the test to analyze.
         """
+        self.dut_config = ivm6201_config
+        self.mcp = get_device(deviceNo=0)
+        self.dut = get_slave(device=self.mcp,address=self.dut_config.Address) if self.mcp else None
         self.excel_file = excel_file
         self.sheet_name = sheet_name
         self.test_name = test_name
         self.Vars = {}  # Dictionary to store variables and their values
+        self.Const = {}  # Dictionary to store constants and their values
+        self.trim_reg_data = None
+        self.savemeas_data = None
+        random.seed(353)
         self.procedures_df = pd.read_excel(self.excel_file, sheet_name='Procedure')
         self.raw_data = self._load_and_process_data()
         self.actions = DFT_Actions()
@@ -186,6 +200,7 @@ class TestAnalyzer:
 
         # Use a dictionary to map parsing functions to execution logic for better readability and maintainability
         instruction_parsers = {
+            parse_procedure_name: lambda procedure_name : self._process_procedure(procedure_name),
             parse_register_notation: lambda register: None,  # Placeholder for register notation
             parse_wait_delay: lambda delay: self.actions.dft_delay_action(delay),
             parse_force_instruction: lambda force: self.actions.dft_force_action(force),
@@ -207,52 +222,145 @@ class TestAnalyzer:
 
         print(f'Procedure Unknown instruction: {instruction}')
 
-    def _process_savemeas(self, savemeas_data):
+    def _process_savemeas(self, savemeas):
         """
         Processes a 'save measurement' instruction, saving the measured value to the Vars dictionary.
 
         Args:
             savemeas_data (dict): Parsed data from the savemeas instruction.
         """
-        measured_value = self.actions.dft_savemeas_action(savemeas_data)
-        save_variable = savemeas_data.get('save_variable')
-        
+        measured_value = self.actions.dft_savemeas_action(savemeas)
+        save_variable = savemeas.get('save_variable')
         if save_variable:
             self.Vars[save_variable] = measured_value
         else:
-            variable_name = f"{self.test_name}_meas{len(self.Vars) + 1}"
+            variable_name = f"{self.test_name}_test{len(self.Vars) + 1}"
             self.Vars[variable_name] = measured_value
-
-        # if there are more than one measureing value item and no calculate step pass through test limits 
-        # otherwise follow in calculate method 
+        # check the number of measurements made if test 
+        # if the number of measurements made in test more than 1 either it go in calcaultion or Trimming 
+        # check the test is not about triming
+        # check there is no calculation in the test 
         # Perform limits testing
-
-        self.test_limits(measured_value)
-
-        print(f"Updated Vars: {self.Vars}")
-
-    def _process_calculate_expression(self, calculate_data):
+        return measured_value
+    
+    def _process_MinError(self,*args, **kwargs):
+        savemeas = kwargs.get('savemeas',{})
+        trim_reg = kwargs.get('trim_reg',{})
+        registers = trim_reg.get('registers',[])
+        # check both savemeas and trim_reg not null
+        msb=0
+        lsb=0
+        meas_sweep_data = []
+        code = []
+        if savemeas and trim_reg:
+            if self.dut:
+                # msb = [msb+register.get('msb') for register in registers][-1]
+                # lsb = [lsb+register.get('lsb') for register in registers][-1]
+                # sweep loop 
+                # uncomment when you  take iterative measurment
+                # for code_iter in range(2**(msb-lsb)):
+                #     meas_data = self._process_savemeas(savemeas)
+                #     meas_sweep_data.append(meas_data)
+                #     code.append(code_iter)
+                
+                ########### Manual Data Entry Lopp ############
+                while True:
+                    try:
+                            # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ dummy code use it for addition purpose if there is only one register to read and write @@@@@@@@@@@@@@@@@@@@@@
+                        # if len(registers) == 1:
+                        #     register = registers[-1]
+                        #     value = int(input(f'''Enter Trim register value of {trim_reg}\n\
+                        #         Move the Value (must be in int) and notice {savemeas} change\n\
+                        #         press Ctrl+C to exit loop:>'''))
+                        #     I2C_write_register(self.dut,register,value)
+                        # else:
+                        #     print(f'!!!!!!!!!!! multiple registers passed !!!!!!!!!')
+                        value = int(input(f'''Enter Trim register value of {trim_reg}\n\
+                            Move the Value (must be in int) and notice {savemeas} change\n\
+                            press Ctrl+C to exit loop:>'''))
+                        I2C_write_multiple_registers(self.dut,registers,value)
+                        pass
+                    except KeyboardInterrupt:
+                        pass
+    def _process_read_register(self,read_data):
+        registers = read_data.get('registers',[])
+        if self.dut:
+            if registers:
+                register_data = I2C_read_multiple_registers(self.dut,registers)
+                if save_variable := read_data.get('save_variable','') and register_data != None:
+                    self.Vars[save_variable] = register_data
+                elif save_variable := read_data.get('save_variable','') and register_data == None:
+                    self.Vars[save_variable] = 0
+                else:
+                    pass
+        else:
+            if registers:
+                msb = [msb+register.get('msb')+1 for register in registers][-1]
+                lsb = [lsb+register.get('lsb') for register in registers][-1]
+                # sweep loop 
+                # add reading data code here 
+                if save_variable := read_data.get('save_variable',''):
+                    self.Vars[save_variable] = random.randint(2**(msb-lsb)/2,2**(msb-lsb))
+                    print(f'Read operation updated Vars : {self.Vars}')
+                pass
+    def _process_restore_register(self,restore_data):
+        registers = restore_data.get('registers',[])
+        msb=0
+        lsb=0
+        if self.dut:
+            if registers:
+                if restore_variable := restore_data.get('restore_variable',''):
+                    restored_value = self.Vars.get(restore_variable,0)
+                    register_data = I2C_write_multiple_registers(self.dut,registers,restored_value)
+                else:
+                    pass
+        # if there is no device
+        else:
+            if registers:
+                msb = [msb+register.get('msb')+1 for register in registers][-1]
+                lsb = [lsb+register.get('lsb') for register in registers][-1]
+                # sweep loop 
+                # add reading data code here 
+                if self.dut:
+                    pass
+                else:
+                    if restore_variable := restore_data.get('restore_variable',''):
+                        restored_value = self.Vars.get(restore_variable,0)
+                        print(f'restored_value of {restore_variable} operation updated Vars : {restored_value}')
+                    pass
+        
+    def _process_calculate_expression(self, calculate_data,*args,**kwargs):
         """
         Processes a 'calculate expression' instruction, evaluating the formula and saving the result to the Vars dictionary.
 
         Args:
             calculate_data (dict): Parsed data from the calculate expression instruction.
         """
+        # print(args,kwargs)
         formula = calculate_data.get('formula')
         operation = calculate_data.get('operation')
+        calculate_varaible = calculate_data.get('calculate_variable')
+        # print(calculate_data)
         try:
-            calculated_value = solve_formula(formula_string=formula, variables=self.Vars | self.Const)
-            if operation:
-                self.Vars[operation] = calculated_value
-            else:
-                variable_name = f"{self.test_name}_test{len(self.Vars) + 1}"
-                self.Vars[variable_name] = calculated_value
+            # check if there is formula process the formula
+            if formula:
+                calculated_value = solve_formula(formula_string=formula, variables=self.Vars | self.Const )
+                if calculate_varaible:
+                    self.Vars[calculate_varaible] = calculated_value
+                elif operation:
+                    self.Vars[operation] = calculated_value
+                else:
+                    calculate_varaible = f"{self.test_name}_test{len(self.Vars) + 1}"
+                    self.Vars[calculate_varaible] = calculated_value
 
-            # Perform limits testing
-            self.test_limits(calculated_value)
-
-            print(
-                f"Calculated {operation if operation else variable_name} = {calculated_value} using formula {formula} and values: {self.Vars}")
+                # Perform limits testing
+                self.test_limits(calculated_value)
+                print(
+                    f"Calculated {calculate_varaible if calculate_varaible else operation} = {calculated_value} using formula {formula} and values: {self.Vars}")
+            # if it is trimming avoid formula calculation
+            elif operation == 'MinError' and re.search('trim', self.test_name.lower()):
+                self._process_MinError(**kwargs)
+                
         except Exception as e:
             print(f"Error calculating formula {formula}: {e}")
 
@@ -287,8 +395,6 @@ class TestAnalyzer:
         first_key = next(iter(const_value))
         self.Const[first_key] = const_value[first_key]
 
-        # Perform limits testing
-        self.test_limits(const_value[first_key])
 
         print(f"Updated Const: {self.Const}")
 
@@ -380,8 +486,20 @@ class TestAnalyzer:
             self.actions.dft_delay_action(delay)
         elif (const_value := parse_constant_value(instruction)):
             self._process_constant_value(const_value)
-        elif (register := parse_register_notation(instruction)):
-            print('Test Register operation', register)
+        elif (register_data := parse_register_notation(instruction)):
+            # print('Test Register operation', register_data)
+            registers = register_data.get('registers',[])
+            value = register_data.get('value',None)
+            if self.dut :
+                if value != None:
+                    I2C_write_multiple_registers(self.dut,registers,value)
+                else:
+                    print(f'!!!!!!!!!!!!!! fail Value not exists')
+            else:
+                print(f'!!!! dut not present {register_data}')
+
+            
+                
         elif (force_sweep := parse_force_sweep_instruction(instruction)):
             if (primay_signal := force_sweep.get('primary_signal')) and (ivm6201_pin_check(primay_signal)):
                 if (secondary_signal := force_sweep.get('secondary_signal')):
@@ -394,9 +512,24 @@ class TestAnalyzer:
                     print(
                         f'!!!!! force_sweep primary fail Signal pin Does not Exist: {primay_signal} , {force_sweep}')
         elif (force := parse_force_instruction(instruction)):
-            self.actions.dft_force_action(force)
+            # check the forcing pin of the IVM6201 
+            primary_signal = force.get('primary_signal')
+            secondary_signal = primary_signal if (primary_signal := force.get('secondary_signal')) else 'GND'
+            
+            if ivm6201_pin_check(primary_signal) and ivm6201_pin_check(secondary_signal):
+                self.actions.dft_force_action(force)
+            else:
+                print(f'!!!!!!!!!! IVM6201 Pin Check Failed Primary Signal : {primary_signal} Secondary Signal (reference) : {secondary_signal}')
         elif (savemeas := parse_savemeas(instruction)):
-            self._process_savemeas(savemeas)
+            # check it is Trim sweep 
+            self.savemeas_data = savemeas
+            if len(self.Vars) == 1 and not re.search('trim', self.test_name.lower()) and not re.search('Calculate__',self.raw_data.loc['Instructions', self.test_name]):
+                measured_value = self._process_savemeas(savemeas)
+                self.test_limits(measured_value)
+                print(f"Updated Vars: {self.Vars}")
+            elif  re.search('trim', self.test_name.lower()) and not re.search('Calculate__MinError',self.raw_data.loc['Instructions', self.test_name]):
+                measured_value = self._process_savemeas(savemeas)
+                print(f"Updated Vars: {self.Vars}")
         elif (measrement := parse_measurements(instruction)):
             if (primay_signal := measrement.get('primary_signal')) and (ivm6201_pin_check(primay_signal)):
                 if (secondary_signal := measrement.get('secondary_signal')):
@@ -408,14 +541,21 @@ class TestAnalyzer:
                 else:
                     print(
                         f'!!!!! measurement primary fail Signal pin Does not Exist: {primay_signal} , {measrement}')
+        elif (read_data := parse_read_instruction(instruction)):
+            self._process_read_register(read_data=read_data)
+        elif (restore_data := parse_restore_instruction(instruction)):
+            self._process_restore_register(restore_data)
         elif (trigger := parse_trigger_instruction(instruction)):
             pass
         elif (trim_reg := parse_trim_instruction(instruction)):
+            self.trim_reg_data = trim_reg
             pass
         elif (meas_match := parse_meas_match_regex(instruction)):
             pass
         elif (calculate := parse_calculate_expression(instruction)):
-            self._process_calculate_expression(calculate)
+            trim_reg = self.trim_reg_data if self.trim_reg_data else None
+            savemeas = self.savemeas_data if self.savemeas_data else None
+            self._process_calculate_expression(calculate,savemeas=savemeas, trim_reg=trim_reg)
         elif (sweep_trig_store := parse_sweep_trig_store(instruction)):
             sweep_signal = sweep_trig_store.get('sweep_signal')
             sweeper_reference = sweep_trig_store.get('sweeper_reference')
