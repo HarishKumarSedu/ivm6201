@@ -316,7 +316,7 @@ def parse_read_instruction(text):
         
         return {
             'registers': registers,
-            'save_variable': match.group(3)
+            'read_variable': match.group(3)
         }
     
     return None

@@ -75,8 +75,9 @@ class DFT_Actions:
         """
         primary_signal = savemeas_dict.get('primary_signal')
         secondary_signal = savemeas_dict.get('secondary_signal', 'GND')  # Default to 'GND' if not provided
+        save_variable = savemeas_dict.get('save_variable', '')  # Default to 'GND' if not provided
         unit = savemeas_dict.get('unit')
-        prompt_string = f'Measure {unit} between {primary_signal} wrt {secondary_signal} .. enter value:>'
+        prompt_string = f'Measure {unit} between {primary_signal} wrt {secondary_signal} .. enter to Varaible "{save_variable}" value:>'
 
         while True:
             try:
@@ -211,7 +212,7 @@ class TestAnalyzer:
         # Use a dictionary to map parsing functions to execution logic for better readability and maintainability
         instruction_parsers = {
             parse_procedure_name: lambda procedure_name : self._process_procedure(procedure_name),
-            parse_register_notation: lambda register: None,  # Placeholder for register notation
+            parse_register_notation: lambda registers: I2C_write_multiple_registers(self.dut,registers.get('registers',[]),registers.get('value',0)),  # Placeholder for register notation
             parse_wait_delay: lambda delay: self.actions.dft_delay_action(delay),
             parse_force_instruction: lambda force: self.actions.dft_force_action(force),
             parse_savemeas: self._process_savemeas,
@@ -274,7 +275,7 @@ class TestAnalyzer:
                 # uncomment when you  take iterative measurment
                 # for code_iter in range(2**(msb-lsb)):
                 #     meas_data = self._process_savemeas(savemeas)
-                #     meas_sweep_data.append(meas_data)
+                #     meas_sweep_data.append(meas_data)e
                 #     code.append(code_iter)
                 
                 ########### Manual Data Entry Lopp ############
@@ -304,12 +305,14 @@ class TestAnalyzer:
         if self.dut:
             if registers:
                 register_data = I2C_read_multiple_registers(self.dut,registers)
-                if save_variable := read_data.get('save_variable','') and register_data != None:
-                    self.Vars[save_variable] = register_data
-                elif save_variable := read_data.get('save_variable','') and register_data == None:
-                    self.Vars[save_variable] = 0
+                read_variable = read_data.get('read_variable','')
+                if read_variable and register_data != None:
+                    self.Vars[read_variable] = register_data
+                elif read_variable and register_data == None:
+                    self.Vars[read_variable] = 0
                 else:
                     pass
+                print(f'read varaible updated : {self.Vars}')
         else:
             if registers:
                 msb = [msb+register.get('msb')+1 for register in registers][-1]
@@ -546,7 +549,15 @@ class TestAnalyzer:
             if len(self.Vars) <= 1 and not re.search('trim', self.test_name.lower()) and not re.search('Calculate__MinError',self.raw_data.loc['Instructions', self.test_name]):
                 measured_value = self._process_savemeas(savemeas)
                 self.test_limits(measured_value)
-                print(f"Updated Vars: {self.Vars}")
+                print(f"Updated measure Vars: {self.Vars}")
+            elif (not re.search('trim', self.test_name.lower()) ) and (not re.search('Calculate__MinError',self.raw_data.loc['Instructions', self.test_name])):
+                measured_value = self._process_savemeas(savemeas)
+                print(f"Updated measure Vars: {self.Vars}")
+            else:
+                measured_value = self._process_savemeas(savemeas)
+                print(f"Updated measure Vars: {self.Vars}")
+                
+
         elif (measrement := parse_measurements(instruction)):
             if (primay_signal := measrement.get('primary_signal')) and (ivm6201_pin_check(primay_signal)):
                 if (secondary_signal := measrement.get('secondary_signal')):
