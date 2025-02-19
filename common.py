@@ -63,10 +63,14 @@ def I2C_read_register(slave,register_addr:0x00):
 def I2C_read_register_bits(slave,register_addr:0x00,msb:int,lsb: int):
     try:
         if slave:
+            # check if the lsb and msb mentioned in absolute bit postion 
+            msb = msb-8 if msb >=8 else msb
+            lsb = msb-8 if lsb >=8 else lsb
             bit_width = 2**(msb - lsb+1)
             mask = ((bit_width-1) << lsb)
             device_data = int.from_bytes(slave.read_register(register_addr),'little')
-            device_bitmodified_data = int(device_data) >> lsb
+            # print(f' register read full {hex(register_addr)} {hex(device_test)}')
+            device_bitmodified_data = (device_data & mask) >> lsb
             return device_bitmodified_data
         else :
             return None
@@ -78,29 +82,40 @@ def I2C_write_register(slave,register:dict,value:Union[int,float],*args,**kwargs
         register_addr = register.get('address')
         msb = register.get('msb')
         lsb = register.get('lsb')
+        # check if the lsb and msb mentioned in absolute bit postion 
+        msb = msb-8 if msb >=8 else msb
+        lsb = msb-8 if lsb >=8 else lsb
         device_data = I2C_read_register(slave=slave,register_addr=register_addr) # write the existing data
         bit_width = 2**(msb - lsb+1)
         mask = ~((bit_width-1) << lsb)
         device_data = (device_data & mask) | ((int(value)) << lsb) # modify the data
         slave.write([register_addr,device_data])
-        return I2C_read_register(slave=slave,register_addr=register_addr)
+        device_data = I2C_read_register(slave=slave,register_addr=register_addr) # read dat back to confirm writing
+        # print(f'data read {hex(register_addr)}',hex(device_data))
+        return device_data
+    
     else:
         return None
 def I2C_read_multiple_registers(slave, registers:[]):
     bitwidth_filled = 0
     final_value = 0
+    register_data=0
     if slave:
         # check if there is an empty registers 
         if registers:
-            for register in registers:
+            for register in registers[::-1]:
                 register_addr = register.get('address')
                 msb = register.get('msb')
                 lsb = register.get('lsb')
+                # check if the lsb and msb mentioned in absolute bit postion 
+                msb = msb-8 if msb >=8 else msb
+                lsb = msb-8 if lsb >=8 else lsb
                 register_data = I2C_read_register_bits(slave=slave, register_addr=register_addr, msb=msb, lsb=lsb)
-                register_data = random.randint(0,2)
-                final_value = (register_data << bitwidth_filled) + final_value
+                # register_data = random.randint(0,2)
+                final_value = (register_data << bitwidth_filled) | final_value
                 bitwidth_filled = (msb-lsb+1) + bitwidth_filled
-                # print(f'read register: {register} register data: {register_data} value:{hex(final_value)} ')
+                # print(f' register {hex(register_addr)} value = {hex(final_value)}')
+                # print(f'read register: {register} register data: {hex(register_data)} value:{hex(final_value)} ')
         return final_value
     else:
         return None
@@ -111,15 +126,18 @@ def I2C_write_multiple_registers(slave, registers:[],value=Union[int|float]):
     if slave:
         # check if there is an empty registers 
         if registers:
-            for register in registers:
+            for register in registers[::-1]:
                 register_addr = register.get('address')
                 msb = register.get('msb')
                 lsb = register.get('lsb')
+                # check if the lsb and msb mentioned in absolute bit postion 
+                msb = msb-8 if msb >=8 else msb
+                lsb = msb-8 if lsb >=8 else lsb
                 mask = (2**(msb-lsb+1)-1) << bitwidth_filled
                 new_value = (value & mask) >> bitwidth_filled
                 register_data = I2C_write_register(slave=slave, register=register,value=new_value)
                 bitwidth_filled = (msb-lsb+1) + bitwidth_filled
-                # print(f'write register = {register}, value={hex(new_value)}')
+                # print(f'write register = {register}, value={hex(register_data)}')
             return I2C_read_multiple_registers(slave=slave, registers=registers)
         else : return None
     else:
@@ -130,7 +148,7 @@ def device_test():
 
     print("Searching...")
 
-    for addr in range(0, 0x80):
+    for addr in range(0, 0x7F):
         try:
             mcp.I2C_read(addr)
             print("I2C slave found at address 0x%02X" % (addr))
@@ -140,11 +158,16 @@ def device_test():
 
 if __name__=='__main__':
     device = get_device()
-    # slave = get_slave(device=device,address=ivm6201_config.Address)
+    # device_test()
+    slave = get_slave(device=device,address=ivm6201_config.Address)
     # select page 0 
-    # I2C_write_register(slave=slave, register={'address':0xFE, 'msb':7, 'lsb':0}, value=0)
-    # print('Device id and version id ', I2C_read_register(slave=slave, register_addr=0xFF))
-    # print('Device id',I2C_read_register_bits(slave=slave,register_addr=0xFE, msb=7,lsb=3))
-    final_value = I2C_write_multiple_registers(slave=None, registers=[{'address':0x01, 'msb':7, 'lsb':0},{'address':0x02, 'msb':3, 'lsb':1},{'address':0x03, 'msb':3, 'lsb':3}],value=int(0x9f0))
+    I2C_write_register(slave=slave, register={'address':0xFE, 'msb':0, 'lsb':0}, value=int(0x0))
+    I2C_write_register(slave=slave, register={'address':0x0, 'msb':1, 'lsb':0}, value=int(0xf))
+    # print('Device id and version id ', hex(I2C_read_register(slave=slave, register_addr=0xFF)))
+    # print('device id',hex(I2C_read_register_bits(slave=slave,register_addr=0xFF, msb=7,lsb=3)))
+    # print('8bit data ', hex(I2C_read_register(slave=slave, register_addr=0x0)))
+    # print('bit data',hex(I2C_read_register_bits(slave=slave,register_addr=0x0, msb=1,lsb=0)))
+    final_value = I2C_write_multiple_registers(slave=slave, registers=[{'address':0x20, 'msb':0, 'lsb':0},{'address':0xFC, 'msb':1, 'lsb':0}],value=int(0x6))
     print(hex(final_value))
-    # print(hex(I2C_read_multiple_registers(slave=None, registers=[{'address':0x01, 'msb':7, 'lsb':0},{'address':0x02, 'msb':3, 'lsb':2}])))
+    # print(hex(I2C_read_register_bits(slave=slave, register_addr=0xFC,msb=1,lsb=0)))
+    # print(hex(I2C_read_multiple_registers(slave=slave, registers=[{'address':0x20, 'msb':0, 'lsb':0},{'address':0xFC, 'msb':1, 'lsb':0},])))

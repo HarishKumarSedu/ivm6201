@@ -1,5 +1,5 @@
 ivm6201:
-  Address: 0x68
+  Address: 0x6C
   pins:
     pin01 : OUT2+
     pin02 : OUT2+
