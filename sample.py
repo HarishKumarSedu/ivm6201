@@ -286,8 +286,8 @@ class TestAnalyzer:
                 self.Vars[save_variable] = random.randint(2**(msb-lsb)/2,2**(msb-lsb))
                 print(f'Read operation updated Vars : {self.Vars}')
             pass
-    def _process_restore_register(self,read_data):
-        registers = read_data.get('registers',[])
+    def _process_restore_register(self,restore_data):
+        registers = restore_data.get('registers',[])
         msb=0
         lsb=0
         if registers:
@@ -295,10 +295,13 @@ class TestAnalyzer:
             lsb = [lsb+register.get('lsb') for register in registers][-1]
             # sweep loop 
             # add reading data code here 
-            if restore_variable := read_data.get('restore_variable',''):
-                restored_value = self.Vars.get(restore_variable,0)
-                print(f'restored_value of {restore_variable} operation updated Vars : {restored_value}')
-            pass
+            if self.ivm6201:
+                pass
+            else:
+                if restore_variable := restore_data.get('restore_variable',''):
+                    restored_value = self.Vars.get(restore_variable,0)
+                    print(f'restored_value of {restore_variable} operation updated Vars : {restored_value}')
+                pass
         
     def _process_calculate_expression(self, calculate_data,*args,**kwargs):
         """

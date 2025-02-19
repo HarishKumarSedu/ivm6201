@@ -56,6 +56,19 @@ def I2C_read_register(slave,register_addr:0x00):
     except Exception as e:
         print(e)
         
+def I2C_read_register_bits(slave,register_addr:0x00,msb:int,lsb: int):
+    try:
+        if slave:
+            bit_width = 2**(msb - lsb+1)
+            mask = ((bit_width-1) << lsb)
+            device_data = int.from_bytes(slave.read_register(register_addr),'little')
+            device_bitmodified_data = int(device_data,16) >> lsb
+            return device_bitmodified_data
+        else :
+            return None
+    except Exception as e:
+        print(e)
+        
 def I2C_write_register(slave,register:dict,value:int|float):
     if slave:
         register_addr = register.get('address')
