@@ -27,7 +27,6 @@ optimal_measured_value = None
 
 # Simulate measurements and find the optimal code
 for i in range(num_steps):
-  @
   I2C_WRITE("0x68",{'fieldname': 'ref_vbg_trim', 'length': 4, 'registers': [{'REG': '0xC1', 'POS': 4, 'RegisterName': 'OTP register 129', 'RegisterLength': 8, 'Name': 'ref_vbg_trim[3:0]', 'Mask': '0xF0', 'Length': 4, 'FieldMSB': 3, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '00', 'User': '00000000', 'Clocking': 'FRO', 'Reset': 'C', 'PageName': 'PAG1'}]},i)
   # Generate monotonic values with step size
   expected_value = low_value + i * step_size 
