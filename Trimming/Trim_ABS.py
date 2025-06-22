@@ -38,7 +38,6 @@ for i in range(num_steps):
     optimal_code = hex(i)
     optimal_measured_value = measured_value
 
-print(low_value,high_value)
 # Check for limits
 if low_value < optimal_measured_value < high_value:
     print(f'............ {Test_Name} Test Passed ........')
