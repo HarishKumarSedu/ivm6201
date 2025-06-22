@@ -36,7 +36,7 @@ for i in range(num_steps):
     noisy_values = expected_values + np.random.normal(0, noise_std_dev) * np.random.choice([1,-1])
     # Pass the noisy value as the expected measurement values
     # SaveMeas__Voltage__hwmute__GND
-    measured_value = VMEASURE(signal="CD/DIAG", reference=GND1-, expected_value=noisy_values)
+    measured_value = VMEASURE(signal="CD/DIAG", reference="GND1m", expected_value=noisy_values)
     error = abs(measured_value - typical_value)
     if error < min_error:
         min_error = error
