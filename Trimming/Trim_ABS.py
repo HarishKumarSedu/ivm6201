@@ -38,13 +38,14 @@ for i in range(num_steps):
     optimal_code = hex(i)
     optimal_measured_value = measured_value
 
+print(low_value,high_value)
 # Check for limits
 if low_value < optimal_measured_value < high_value:
     print(f'............ {Test_Name} Test Passed ........')
-    I2C_WRITE(device_address=0x68, field_info="{'fieldname': 'ref_vbg_trim', 'length': 4, 'registers': [{'REG': '0xC1', 'POS': 4, 'RegisterName': 'OTP register 129', 'RegisterLength': 8, 'Name': 'ref_vbg_trim[3:0]', 'Mask': '0xF0', 'Length': 4, 'FieldMSB': 3, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '00', 'User': '00000000', 'Clocking': 'FRO', 'Reset': 'C', 'PageName': 'PAG1'}]}", write_value=optimal_code)
+    I2C_WRITE(device_address=0x68, field_info={'fieldname': 'ref_abscurr_trim', 'length': 5, 'registers': [{'REG': '0xC0', 'POS': 0, 'RegisterName': 'OTP register 128', 'RegisterLength': 8, 'Name': 'ref_abscurr_trim[4:0]', 'Mask': '0x1F', 'Length': 5, 'FieldMSB': 4, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '30', 'User': '00000000', 'Clocking': 'FRO', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=optimal_code)
 else:
     print(f'............ {Test_Name} Test Failed ........')
-    I2C_WRITE(device_address=0x68, field_info="{'fieldname': 'ref_vbg_trim', 'length': 4, 'registers': [{'REG': '0xC1', 'POS': 4, 'RegisterName': 'OTP register 129', 'RegisterLength': 8, 'Name': 'ref_vbg_trim[3:0]', 'Mask': '0xF0', 'Length': 4, 'FieldMSB': 3, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '00', 'User': '00000000', 'Clocking': 'FRO', 'Reset': 'C', 'PageName': 'PAG1'}]}", write_value=0)
+    I2C_WRITE(device_address=0x68, field_info={'fieldname': 'ref_abscurr_trim', 'length': 5, 'registers': [{'REG': '0xC0', 'POS': 0, 'RegisterName': 'OTP register 128', 'RegisterLength': 8, 'Name': 'ref_abscurr_trim[4:0]', 'Mask': '0x1F', 'Length': 5, 'FieldMSB': 4, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '30', 'User': '00000000', 'Clocking': 'FRO', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=0)
 print(f"Optimal Code: {optimal_code}")
 print(f"Optimal measured value : {optimal_measured_value}")
 print(f"Minimum Error: {min_error}")
