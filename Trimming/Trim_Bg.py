@@ -45,6 +45,7 @@ if low_value < optimal_measured_value < high_value:
     I2C_WRITE(device_address=0x68, field_info="{'fieldname': 'ref_vbg_trim', 'length': 4, 'registers': [{'REG': '0xC1', 'POS': 4, 'RegisterName': 'OTP register 129', 'RegisterLength': 8, 'Name': 'ref_vbg_trim[3:0]', 'Mask': '0xF0', 'Length': 4, 'FieldMSB': 3, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '00', 'User': '00000000', 'Clocking': 'FRO', 'Reset': 'C', 'PageName': 'PAG1'}]}", write_value=optimal_code)
 else:
     print(f'............ Trim_Bg Test Failed ........')
+    I2C_WRITE(device_address=0x68, field_info="{'fieldname': 'ref_vbg_trim', 'length': 4, 'registers': [{'REG': '0xC1', 'POS': 4, 'RegisterName': 'OTP register 129', 'RegisterLength': 8, 'Name': 'ref_vbg_trim[3:0]', 'Mask': '0xF0', 'Length': 4, 'FieldMSB': 3, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '00', 'User': '00000000', 'Clocking': 'FRO', 'Reset': 'C', 'PageName': 'PAG1'}]}", write_value=0)
 print(f"Optimal Code: {optimal_code}")
 print(f"Optimal measured value : {optimal_measured_value}")
 print(f"Minimum Error: {min_error}")
