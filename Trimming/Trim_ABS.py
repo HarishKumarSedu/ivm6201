@@ -13,8 +13,8 @@ I2C_WRITE(device_address="0x68", field_info={'fieldname': 'ana_test_sel', 'lengt
 # Initial value
 error_percentage = 0.05 #5%
 typical_value = 4e-6
-low_value = typical_value - typical_value*error_percentage
-high_value = typical_value + typical_value*error_percentage
+low_value = typical_value - typical_value*0.1
+high_value = typical_value + typical_value*0.1
 bit_width = {'fieldname': 'ref_abscurr_trim', 'length': 5, 'registers': [{'REG': '0xC0', 'POS': 0, 'RegisterName': 'OTP register 128', 'RegisterLength': 8, 'Name': 'ref_abscurr_trim[4:0]', 'Mask': '0x1F', 'Length': 5, 'FieldMSB': 4, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '30', 'User': '00000000', 'Clocking': 'FRO', 'Reset': 'C', 'PageName': 'PAG1'}]}.get('length')
 # Number of steps width of the field / bits
 num_steps = 2**bit_width  # 4-bit
