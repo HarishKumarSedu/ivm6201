@@ -10,20 +10,16 @@ I2C_WRITE(device_address="0x68", field_info={'fieldname': 'ref_test_en', 'length
 I2C_WRITE(device_address="0x68", field_info={'fieldname': 'ana_test_sel', 'length': 4, 'registers': [{'REG': '0x1F', 'POS': 0, 'RegisterName': 'Analog test 2', 'RegisterLength': 8, 'Name': 'ana_test_sel[3:0]', 'Mask': '0xF', 'Length': 4, 'FieldMSB': 3, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '00', 'User': '00000000', 'Clocking': 'SMB', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=0x06)
 
 # Initial value
+error_percentage = 0.05 #5%
 low_value = 1.18
 typical_value = 1.242
 high_value = 1.3
 bit_width = {'fieldname': 'ref_vbg_trim', 'length': 4, 'registers': [{'REG': '0xC1', 'POS': 4, 'RegisterName': 'OTP register 129', 'RegisterLength': 8, 'Name': 'ref_vbg_trim[3:0]', 'Mask': '0xF0', 'Length': 4, 'FieldMSB': 3, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '00', 'User': '00000000', 'Clocking': 'FRO', 'Reset': 'C', 'PageName': 'PAG1'}]}.get('length')
-
 # Number of steps width of the field / bits
 num_steps = 2**bit_width  # 4-bit
 # Step size
 step_size = typical_value / num_steps 
-print(step_size)
-
-# Standard deviation for white noise
-noise_std_dev = 0.025
-
+error_spread = typical_value * typical_value
 # Initialize minimum error and optimal code
 min_error = float('inf')
 optimal_code = None
@@ -31,18 +27,18 @@ optimal_measured_value = None
 
 # Simulate measurements and find the optimal code
 for i in range(num_steps):
-    # Generate monotonic values with step size
-    expected_values = low_value + i * step_size 
-    # Add white noise to each value
-    noisy_values = expected_values + np.random.normal(0, noise_std_dev) * np.random.choice([1,-1])
-    # Pass the noisy value as the expected measurement values
-    # SaveMeas__Voltage__hwmute__GND
-    measured_value = VMEASURE(signal="CD/DIAG", reference="GND1m", expected_value=noisy_values)
-    error = abs(measured_value - typical_value)
-    if error < min_error:
-        min_error = error
-        optimal_code = hex(i)
-        optimal_measured_value = measured_value
+  @
+  I2C_WRITE("0x68",{'fieldname': 'ref_vbg_trim', 'length': 4, 'registers': [{'REG': '0xC1', 'POS': 4, 'RegisterName': 'OTP register 129', 'RegisterLength': 8, 'Name': 'ref_vbg_trim[3:0]', 'Mask': '0xF0', 'Length': 4, 'FieldMSB': 3, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '00', 'User': '00000000', 'Clocking': 'FRO', 'Reset': 'C', 'PageName': 'PAG1'}]},i)
+  # Generate monotonic values with step size
+  expected_value = low_value + i * step_size 
+  # Pass the noisy value as the expected measurement values
+  # SaveMeas__Voltage__hwmute__GND
+  measured_value = VMEASURE(signal="CD/DIAG", reference="GND1m", expected_value=expected_value,error_spread=error_spread)
+  error = abs(measured_value - typical_value)
+  if error < min_error:
+    min_error = error
+    optimal_code = hex(i)
+    optimal_measured_value = measured_value
 
 # Check for limits
 if low_value < optimal_measured_value < high_value:
