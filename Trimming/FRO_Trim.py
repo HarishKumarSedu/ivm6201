@@ -48,13 +48,6 @@ for i in range(num_steps):
         min_error = error
         optimal_code = hex(i)  # Save the trim code corresponding to minimum error 
         optimal_measured_frequency = measured_frequency
-
-### Output Results 
-# Output results of the trimming process 
-print(f"Optimal Trim Code: {optimal_code}")
-print(f"Optimal Measured Frequency: {optimal_measured_frequency} Hz")
-print(f"Minimum Frequency Error: {min_error} Hz")
-
 ### Validation and Finalization 
 # Check if the measured frequency falls within the acceptable range 
 if low_frequency < optimal_measured_frequency < high_frequency:
@@ -64,3 +57,8 @@ if low_frequency < optimal_measured_frequency < high_frequency:
 else:
     print(f'............ {Test_name} Trim  Failed ........')
     I2C_WRITE(device_address=0x68, field_info={'fieldname': 'ref_fro_trim', 'length': 3, 'registers': [{'REG': '0xC1', 'POS': 0, 'RegisterName': 'OTP register 129', 'RegisterLength': 8, 'Name': 'ref_fro_trim[2:0]', 'Mask': '0x7', 'Length': 3, 'FieldMSB': 2, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '00', 'User': '00000000', 'Clocking': 'FRO', 'Reset': 'C', 'PageName': 'PAG1'}]}, write_value=0)
+### Output Results 
+# Output results of the trimming process 
+print(f"Optimal Trim Code: {optimal_code}")
+print(f"Optimal Measured Frequency: {optimal_measured_frequency} Hz")
+print(f"Minimum Frequency Error: {min_error} Hz")
