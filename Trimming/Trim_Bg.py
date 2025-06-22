@@ -14,9 +14,9 @@ low_value = 1.18
 typical_value = 1.242
 high_value = 1.3
 bit_width = {'fieldname': 'ref_vbg_trim', 'length': 4, 'registers': [{'REG': '0xC1', 'POS': 4, 'RegisterName': 'OTP register 129', 'RegisterLength': 8, 'Name': 'ref_vbg_trim[3:0]', 'Mask': '0xF0', 'Length': 4, 'FieldMSB': 3, 'FieldLSB': 0, 'Attribute': 'NNNNNNNN', 'Default': '00', 'User': '00000000', 'Clocking': 'FRO', 'Reset': 'C', 'PageName': 'PAG1'}]}.get('length')
-print(bit_width)
 # Step size
-step_size = 0.02
+step_size = typical_value / bit_width
+print(step_size)
 
 # Number of steps width of the field / bits
 num_steps = 2**4  # 4-bit
