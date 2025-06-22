@@ -1,6 +1,8 @@
 # import all the functionalities of the dfttools library
 from dfttools import *
 import time
+Test_name = 'Startup_REF'
+print(f'.... Procedure {Test_name}........')
 # force 4V on ENABLE pin wrt GND1+
 VFORCE(signal="Enable",reference="GND1m",value=4)
 VFORCE(signal="V5VDR",reference="GND1m",value=5.2)
